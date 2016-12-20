@@ -1,3 +1,5 @@
+# Q2 Group Project Requirements
+
 The goal of this project is to put what you've learned to use to:
 
 * [Write a project proposal and get it approved by an instructor](#proposal)
