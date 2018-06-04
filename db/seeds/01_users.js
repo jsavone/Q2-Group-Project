@@ -9,7 +9,7 @@ exports.seed = function(knex, Promise) {
         {name: 'Nisha', email: 'nisha@nisha.com',bio:'showing off cooking skills to the world',img_url:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",password:'nisha'},
         {name: 'David', email: 'david@david.com',bio:'definitely better at cooking than coding',img_url:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",password:'david'},
         {name: 'admin', email: 'admin@admin.com',bio:'admin',img_url:"",password:'admin',admin:true}
-      
+
       ]);
     });
 };
