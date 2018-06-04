@@ -8,7 +8,7 @@ module.exports = {
   },
 
   index: function(req, res) {
-    knex('recipes').join('users', 'users.id', 'recipes.user_id').then((recipes) => {
+    knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').then((recipes) => {
       // res.json(recipes);
         res.render("index", {recipes:recipes});
     })
@@ -31,7 +31,7 @@ module.exports = {
       if(user.password===req.body.password){ //store the user id in session
         req.session.user_id=user.id;
         req.session.save(()=>{
-          res.redirect("/recipes");
+          res.redirect("/recipe/:id");
         })
       }else {
         res.redirect('/');
