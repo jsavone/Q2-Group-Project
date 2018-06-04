@@ -13,7 +13,6 @@ module.exports = {
         res.render("index", {recipes:recipes});
     })
 
-
   },
   register:function(req,res){
     knex("users").insert({
