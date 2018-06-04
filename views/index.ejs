@@ -11,9 +11,36 @@
   </head>
   <body>
     <header>
-          <img class="logo" src="https://seeklogo.com/images/R/restaurant-logo-7B8FF68CBF-seeklogo.com.png">
+      <img class="logo" src="https://seeklogo.com/images/R/restaurant-logo-7B8FF68CBF-seeklogo.com.png">
+      <a href="/users/login">Login</a>
+      <a href="/users/login">Register</a>
     </header>
+    <div class="recipeContainer">
+      <div class="recipeImage">
+      </div>
+      <div class="recipeInfo">
+        <h3>Recipes</h3>
+      </div>
+      <div class="recipeVotes">
+        <h3>Total Votes</h3>
+      </div>
+      <div class="recipe">
+        <% for(let i = 0; i < recipes.length; i++) { %>
+          <div class="recipeImage">
+            <img src="<%=recipes[i].recipe_image%>" alt="recipe image">
+          </div>
+          <div class="recipeInfo">
+            <h2><%=recipes[i].recipe_name%></h2>
+            <p>by - <%=recipes[i].name%></p>
+            <a href="/<%=recipes[i].id%>">View</a>
+          </div>
+          <div class="recipeVotes">
+            <h1><%=recipes[i].total_votes%></h1>
+          </div>
+        <% } %>
+      </div>
 
+    </div>
 
 
   </body>
