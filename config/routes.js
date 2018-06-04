@@ -7,5 +7,5 @@ module.exports = function(app){
 app.get('/users/login', users.render);
 app.post('/register', users.register);
 app.post('/login', users.login);
-
+app.get('/users/recipes', users.view);
 }

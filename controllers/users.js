@@ -23,7 +23,7 @@ module.exports = {
       img_url:req.body.img_url,
       password:req.body.password
     }).then(()=>{
-      res.redirect('/');
+      res.redirect('/users/login');
     })
   },
   login:function(req,res){
@@ -32,7 +32,7 @@ module.exports = {
       if(user.password===req.body.password){ //store the user id in session
         req.session.user_id=user.id;
         req.session.save(()=>{
-          res.redirect("/receipes");
+          res.redirect("/recipes");
         })
       }else {
         res.redirect('/');
