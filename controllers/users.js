@@ -20,7 +20,19 @@ module.exports = {
     })
 
   },
+
+  categories: (req, res) => {
+    knex('recipes').join('rec_to_cat', 'recipes.id', "rec_to_cat.recipe_id").join('categories', 'rec_to_cat.category_id', 'categories.id').join('users', 'users.id', 'recipes.user_id').where('categories.id', req.params.id).then((results) => {
+      // res.json(results);
+      res.render("index", {recipes:results});
+    })
+
+
+
+  },
+
   register:function(req,res){
+    req.session.errors = null
     knex("users").insert({
       name:req.body.name,
       email:req.body.email,

@@ -11,6 +11,7 @@ app.get('/users/register', users.newUsers);
 app.post('/register', users.register);
 app.post('/login', users.login);
 app.get('/recipe/:id', recipes.view);
+app.get('/recipe/categories/:id', users.categories);
 app.use(authenticateUser);
 app.get('/existingusers_profile', users.profile);
 app.get('/recipe/delete/:id', recipes.delete)
