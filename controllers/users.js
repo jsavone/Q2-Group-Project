@@ -8,10 +8,10 @@ module.exports = {
   },
   existingUsers: function(req,res){
     if(!req.session.errors){
-      req.session.errors = [];
+      req.session.errors = null;
     }
-res.render("login", {errors: req.session.errors});
-},
+    res.render("login", {errors: req.session.errors});
+    },
 
   index: function(req, res) {
     knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').orderBy('recipes.total_votes', 'desc').then((recipes) => {
@@ -35,6 +35,7 @@ res.render("login", {errors: req.session.errors});
 
   },
   login:function(req,res){
+    req.session.errors = null
     knex('users').where("email", req.body.email).then((results)=>{
       let user=results[0];
       if(user.password===req.body.password){ //store the user id in session
@@ -43,7 +44,7 @@ res.render("login", {errors: req.session.errors});
           res.redirect(`/existingusers_profile/${user.id}`);
         })
       }  else{
-          req.session.errors.push("Email or Password was invalid");
+          req.session.errors = "Email or Password was invalid";
           req.session.save(()=>{
             res.redirect("/users/login");
           })
@@ -65,13 +66,14 @@ res.render("login", {errors: req.session.errors});
 
 
   profile: async function(req, res) {
+    req.session.errors = null
     const users = await knex("users").where("id", req.session.user_id);
     const recipe = await knex("recipes").where({user_id: req.session.user_id});
     const saved_recipes = await knex("saved_recipes").where({user_id: req.session.user_id});
     const finalSavedRecipes = await Promise.all(saved_recipes.map(saved_recipe =>
                               knex("recipes").where({id: saved_recipe.recipe_id}).first()
                             )) ;
-    console.log('finalSavedRecipes ', finalSavedRecipes)
+    // console.log('finalSavedRecipes ', finalSavedRecipes)
     res.render("user-profile", {
       user: users[0],
       recipe,

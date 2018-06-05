@@ -16,7 +16,7 @@
     </form>
     <h3>Current Categories:</h3>
     <% for(let i = 0; i < added_cats.length; i++) { %>
-      <p><%=added_cats[i].cat_name%> <a href="/categories/remove/<%=recipe%>/<%=categories[i].id%>">Remove</a></p>
+      <p><%=added_cats[i].cat_name%> <a href="/categories/remove/<%=recipe%>/<%=added_cats[i].category_id%>">Remove</a></p>
     <% } %>
   </body>
 </html>

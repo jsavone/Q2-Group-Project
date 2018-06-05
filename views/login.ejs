@@ -13,6 +13,9 @@
   </head>
   <body>
     <h1>Login</h1>
+    <% if (errors) { %>
+      <p><%=errors%></p>
+    <% } %>
     <form action="/login" method="post">
       <p><input type="email" name="email" placeholder="Email"></p>
       <p><input type="password" name="password" placeholder="Password"></p>
