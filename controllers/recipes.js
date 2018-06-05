@@ -75,4 +75,21 @@ recipeEdit: function(req, res) {
           })
       })
   },
+
+
+  recipeUpdate: function(req, res) {
+    knex('recipes').where("id", req.params.id)
+      .update({
+        recipe_name: req.body.recipe_name,
+      recipe_image: req.body.recipe_image,
+        ingredients: req.body.ingredients,
+        directions: req.body.directions,
+        prep_time: req.body.prep_time,
+        cook_time: req.body.cook_time,
+
+      })
+      .then(() => {
+        res.redirect('/recipe/'+req.params.id);
+      })
+  },
 }
