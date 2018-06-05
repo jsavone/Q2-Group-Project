@@ -11,5 +11,6 @@ app.post('/register', users.register);
 app.post('/login', users.login);
 
 app.get('/recipe/:id', recipes.view)
+app.get('/create/recipe/:id',recipes.create_recipe);
 
 }
