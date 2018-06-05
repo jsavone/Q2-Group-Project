@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Categories</title>
+  </head>
+  <body>
+    <h2>Add Categories</h2>
+    <form action="/categories/<%=recipe%>" method="post">
+      <select name="categories">
+        <% for (let i = 0; i < categories.length; i++) { %>
+          <option value="<%=categories[i].id%>"><%=categories[i].cat_name%></option>
+      <%  } %>
+      </select>
+      <input type="submit">
+    </form>
+    <h3>Current Categories:</h3>
+    <% for(let i = 0; i < added_cats.length; i++) { %>
+      <p><%=added_cats[i].cat_name%> <a href="/categories/remove/<%=recipe%>/<%=added_cats[i].category_id%>">Remove</a></p>
+    <% } %>
+  </body>
+</html>
