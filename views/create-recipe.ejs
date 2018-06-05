@@ -1,0 +1,59 @@
+<doctype <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <style>
+        h1{
+            font-family: sans-serif;
+            text-align: center;
+        }
+        form{
+            text-align: center;
+            column-width: 0px;
+        }
+        input{
+            width:50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+
+        }
+        img{
+            float:left;
+            margin-left: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>CREATE RECIPE</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM9bEQKrsL_cJ1q3xgnYD20R1cx9uWa8--mqKSmyz-ZM7m_lY4kA" alt="">
+         </div>
+         <div class="col-4">
+           <form action="/create/recipe" method="post">
+              <input type="text" name="recipe_name" placeholder="Recipe Name">
+              <input type="text" name="recipe_image" placeholder="Recipe Image URL">
+              <textarea name="ingredients" placeholder="Ingredients"></textarea>
+              <textarea name="directions" placeholder="Directions"></textarea>
+              <input type="text" name="prep_time" placeholder="Prep Time">
+              <input type="text" name="cook_time" placeholder="Cook Time">
+              <input type="submit" class="btn btn-primary" value="Create">
+            </form>
+            </div>
+        <div class="col-4">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMhmSKubSKK1v1hqH6Od-EIgYIdHbpLnCjI68LIgvK0lR_0oIyfw" alt="">
+            </div>
+       </div>
+    </div>
+</div>
+
+
+</body>
+</html>

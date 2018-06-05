@@ -3,9 +3,63 @@
   <head>
     <meta charset="utf-8">
     <title>Recipe</title>
+    <style media="screen">
+
+      body {
+        text-align: center;
+      }
+
+      img {
+        width: 400px;
+      }
+
+      .logo {
+        width: 150px;
+      }
+
+    </style>
   </head>
   <body>
+    <a href="/"><img class="logo" src="https://seeklogo.com/images/R/restaurant-logo-7B8FF68CBF-seeklogo.com.png"></a>
+
+    <% if (enable_edit) { %>
+      <a href="/recipe/edit/<%=recipe.id%>">Edit</a>
+      <a href="/recipe/delete/<%=recipe.id%>">Delete</a>
+    <% } %>
+
     <h1><%=recipe.recipe_name%></h1>
     <p>by - <%=recipe.name%></p>
+    <img src="<%=recipe.recipe_image%>">
+    <p>Prep Time: <%=recipe.prep_time%></p>
+    <p>Cook Time: <%=recipe.cook_time%></p>
+    <h3>Ingredients:</h3>
+    <p><%=recipe.ingredients%></p>
+    <h3>Directions:</h3>
+    <p><%=recipe.directions%></p>
+    <h3>Total Votes: <%=recipe.total_votes%></h3>
+    <% if (session_user) { %>
+    <a href="/recipe/upvote/<%=recipe.id%>">Upvote</a>
+    <a href="/recipe/downvote/<%=recipe.id%>">Downvote</a>
+    <a href="/recipe/save/<%=recipe.id%>">Save Recipe</a>
+    <% } %>
+    <h3>Comments:</h3>
+      <div class="commentsContainer">
+        <% for (let i = 0; i < comments.length; i++) { %>
+          <div class="comment">
+            <p><%=comments[i].comment%></p>
+            <p>by - <%=comments[i].user_name%></p>
+          </div>
+
+        <% } %>
+        <% if (session_user) { %>
+        <div class="commentForm">
+          <form action="/comment/<%=recipe.id%>" method="post">
+            <textarea name="comment" placeholder="Comment"></textarea>
+            <input type="hidden" name="user_id" value="<%=session_user%>">
+            <input type="submit">
+          </form>
+        </div>
+        <% } %>
+      </div>
   </body>
 </html>
