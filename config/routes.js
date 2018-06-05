@@ -20,7 +20,7 @@ app.post('/comment/:recipe_id', comments.add);
 
 function authenticateUser(req, res, next){
   if(!req.session.user_id){
-    res.redirect("/doctors/login");
+    res.redirect("/users/login");
   }else{
     next();
   }
