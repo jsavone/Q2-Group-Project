@@ -14,7 +14,8 @@ app.get('/recipe/:id', recipes.view)
 app.use(authenticateUser);
 app.get('/recipe/upvote/:id', recipes.upvote);
 app.get('/recipe/downvote/:id', recipes.downvote);
-app.get('/create/recipe/:id',recipes.create_recipe);
+app.get('/create/recipe',recipes.create_recipe);
+app.post('/create/recipe',recipes.add_recipe);
 app.post('/comment/:recipe_id', comments.add);
 }
 

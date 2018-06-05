@@ -19,6 +19,20 @@ module.exports = {
     res.render('create-recipe');
   },
 
+  add_recipe: function(req, res){
+    knex('recipes').insert({
+      recipe_name: req.body.recipe_name,
+      recipe_image: req.body.recipe_image,
+      ingredients: req.body.ingredients,
+      directions: req.body.directions,
+      prep_time: req.body.prep_time,
+      cook_time: req.body.cook_time,
+      user_id: req.session.user_id
+    }).then(()=> {
+      res.redirect('/') //We will need to change this to redirect to user profile
+    })
+  },
+
   upvote: (req, res) => {
     knex('recipes').where('id', req.params.id).increment('total_votes').then(() => {
       res.redirect('/recipe/'+req.params.id)
