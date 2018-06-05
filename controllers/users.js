@@ -15,20 +15,18 @@ module.exports = {
 
   index: function(req, res) {
     knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').orderBy('recipes.total_votes', 'desc').then((recipes) => {
-      // res.json(recipes);
-        res.render("index", {recipes:recipes});
+      knex('categories').then((categories) => {
+        res.render("index", {recipes:recipes, categories:categories});
+      })
     })
-
   },
 
   categories: (req, res) => {
     knex('recipes').join('rec_to_cat', 'recipes.id', "rec_to_cat.recipe_id").join('categories', 'rec_to_cat.category_id', 'categories.id').join('users', 'users.id', 'recipes.user_id').where('categories.id', req.params.id).then((results) => {
-      // res.json(results);
-      res.render("index", {recipes:results});
+        knex('categories').then((categories) => {
+          res.render("index", {recipes:results, categories:categories});
+      })
     })
-
-
-
   },
 
   register:function(req,res){
@@ -65,21 +63,13 @@ module.exports = {
             res.redirect("/users/login");
           })
         }
-}).catch(()=>{
-      req.session.errors.push("Email or Password was invalid");
-      req.session.save(()=>{
-        res.redirect("/users/login");
+      }).catch(()=>{
+            req.session.errors.push("Email or Password was invalid");
+            req.session.save(()=>{
+              res.redirect("/users/login");
       })
     })
   },
-    //   }else {
-    //     res.redirect('/');
-    //   }
-    //   }).catch(()=>{
-    //     res.redirect('/');
-    // })
-
-
 
   profile: async function(req, res) {
     req.session.errors = null
