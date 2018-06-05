@@ -22,8 +22,7 @@
   </head>
   <body>
     <a href="/"><img class="logo" src="/cooks-club.jpg"></a>
-
-    <% if (enable_edit || recipe.user_admin) { %>
+    <% if (enable_edit) { %>
       <a href="/recipe/edit/<%=recipe.id%>">Edit</a>
       <a href="/categories/<%=recipe.id%>">Add Categories</a>
       <a href="/recipe/delete/<%=recipe.id%>">Delete</a>
