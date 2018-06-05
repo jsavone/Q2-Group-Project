@@ -21,6 +21,7 @@ module.exports = {
 
   },
   register:function(req,res){
+    req.session.errors = null
     knex("users").insert({
       name:req.body.name,
       email:req.body.email,
