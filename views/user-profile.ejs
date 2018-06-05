@@ -31,7 +31,8 @@
       <link rel="stylesheet" href="./css/bootstrap.min.css">
   </head>
   <body>
-    <h1>My recipe</h1>
+    <a href="/create_recipe/<%=recipe.id%>>">create recipe</a>
+    <h1>My recipes</h1>
     <div class="container">
       <% for(let i = 0; i<recipe.length; i++){ %>
         <div class="card">
@@ -42,7 +43,7 @@
         <% } %>
     </div>
     <hr/>
-    <h1>Saved recipe</h1>
+    <h1>Saved recipes</h1>
     <div class="container">
       <% for(let i = 0; i<saved_recipes.length; i++){ %>
         <div class="card">

@@ -89,5 +89,17 @@ module.exports = {
     knex('recipes').where('id', req.params.id).del().then(() => {
       res.redirect('/') //NEED TO CHANGE THIS TO PROFILE
     })
-  }
+  },
+
+recipeEdit: function(req, res) {
+    knex("users").where("id", req.session.user_id)
+      .then(() => {
+        knex("recipes").where("id", req.params.id)
+          .then((data) => {
+            res.render("edit_recipe", {
+              recipe: data[0]
+            });
+          })
+      })
+  },
 }

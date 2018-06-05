@@ -15,7 +15,8 @@ app.get('/recipe/delete/:id', recipes.delete)
 app.get('/recipe/upvote/:id', recipes.upvote);
 app.get('/recipe/downvote/:id', recipes.downvote);
 app.get('/recipe/save/:id', recipes.save);
-app.get('/create/recipe',recipes.create_recipe);
+app.get('/recipe/edit/:id', recipes.recipeEdit);
+app.get('/create_recipe/:id',recipes.create_recipe);
 app.post('/create/recipe',recipes.add_recipe);
 app.post('/comment/:recipe_id', comments.add);
 }
