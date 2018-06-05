@@ -7,12 +7,19 @@
       body {
         height: 100vh;
         width: 100vw;
+        background-color: chocolate
+         
       }
 
+      .recipeContainer{
+        background-color: chocolate
+        
+      }
+/* <!-- 
       header a {
         margin: 20px 100px 0 0;
         float: right;
-      }
+      } --> */
 
       .logo {
         width: 150px;
@@ -21,6 +28,7 @@
 
       .recipeImage img{
         width: 200px;
+       
       }
       .recipeInfo {
         width: 30%;
@@ -30,7 +38,13 @@
         margin: 10px auto;
         display: flex;
         height: 200px;
-        border: 2px solid black;
+        /* border: 2px solid black; */
+        box-shadow: 0px 10px 15px 10px rgba(0,0,0,0.5);
+        /* transition: 0.3s; */
+        border-radius: 5px;
+        /* padding-top: 20px; */
+        /* margin-top: 20px; */
+        background-color: burlywood;
         width: 80%;
       }
 
@@ -78,13 +92,12 @@
           </ul>
       </div>
     </nav>
-
-  <body>
-    <header>
+<body>
+    <!-- <header> -->
     <!-- <a href="/"><img class="logo" src="/cooks-club.png"></a> -->
       <!-- <a href="/users/login">Login</a>
       <a href="/users/register">Register</a> -->
-    </header>
+    <!-- </header> -->
     <div class="recipeContainer">
         <% for(let i = 0; i < recipes.length; i++) { %>
           <div class="recipe">
