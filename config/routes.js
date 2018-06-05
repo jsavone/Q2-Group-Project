@@ -2,6 +2,8 @@
 const users = require("../controllers/users.js")
 const recipes = require("../controllers/recipes.js")
 const comments = require("../controllers/comments.js")
+const categories = require("../controllers/categories.js")
+
 module.exports = function(app){
 app.get('/', users.index);
 app.get('/users/login', users.existingUsers);
@@ -19,6 +21,9 @@ app.get('/recipe/edit/:id', recipes.recipeEdit);
 app.get('/create_recipe/:id',recipes.create_recipe);
 app.post('/create/recipe',recipes.add_recipe);
 app.post('/comment/:recipe_id', comments.add);
+app.get('/categories/:recipe_id', categories.add);
+app.post('/categories/:recipe_id', categories.insert);
+app.get('/categories/remove/:recipe_id/:category_id', categories.remove);
 }
 
 function authenticateUser(req, res, next){

@@ -25,6 +25,7 @@
 
     <% if (enable_edit || recipe.user_admin) { %>
       <a href="/recipe/edit/<%=recipe.id%>">Edit</a>
+      <a href="/categories/<%=recipe.id%>">Add Categories</a>
       <a href="/recipe/delete/<%=recipe.id%>">Delete</a>
     <% } %>
 
