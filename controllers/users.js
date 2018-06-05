@@ -75,6 +75,10 @@ res.render("login");
           })
       })
   },
+  logout: function(req, res) {
+    req.session.destroy();
+    res.redirect("/");
+  },
 
-  
+
 }
