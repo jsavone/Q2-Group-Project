@@ -48,6 +48,15 @@ module.exports = {
     })
   },
 
+  save: (req, res) => {
+    knex('saved_recipes').insert({
+      user_id: req.session.user_id,
+      recipe_id: req.params.id
+    }).then(() => {
+      res.redirect('/recipe/'+req.params.id);
+    })
+  },
+
   delete: (req, res) => {
     knex('recipes').where('id', req.params.id).del().then(() => {
       res.redirect('/') //NEED TO CHANGE THIS TO PROFILE
