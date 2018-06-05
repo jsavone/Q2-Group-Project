@@ -4,12 +4,29 @@
     <meta charset="utf-8">
     <title>Recipe</title>
     <style media="screen">
+
+      body {
+        text-align: center;
+      }
+
       img {
         width: 400px;
       }
+
+      .logo {
+        width: 150px;
+      }
+
     </style>
   </head>
   <body>
+    <a href="/"><img class="logo" src="https://seeklogo.com/images/R/restaurant-logo-7B8FF68CBF-seeklogo.com.png"></a>
+
+    <% if (enable_edit) { %>
+      <a href="/recipe/edit/<%=recipe.id%>">Edit</a>
+      <a href="/recipe/delete/<%=recipe.id%>">Delete</a>
+    <% } %>
+
     <h1><%=recipe.recipe_name%></h1>
     <p>by - <%=recipe.name%></p>
     <img src="<%=recipe.recipe_image%>">
