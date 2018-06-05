@@ -20,8 +20,10 @@
     <h3>Directions:</h3>
     <p><%=recipe.directions%></p>
     <h3>Total Votes: <%=recipe.total_votes%></h3>
+    <% if (session_user) { %>
     <a href="/recipe/upvote/<%=recipe.id%>">Upvote</a>
     <a href="/recipe/downvote/<%=recipe.id%>">Downvote</a>
+    <% } %>
     <h3>Comments:</h3>
       <div class="commentsContainer">
         <% for (let i = 0; i < comments.length; i++) { %>

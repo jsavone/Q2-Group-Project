@@ -11,8 +11,17 @@ app.post('/register', users.register);
 app.post('/login', users.login);
 
 app.get('/recipe/:id', recipes.view)
+app.use(authenticateUser);
 app.get('/recipe/upvote/:id', recipes.upvote);
 app.get('/recipe/downvote/:id', recipes.downvote);
 app.get('/create/recipe/:id',recipes.create_recipe);
 app.post('/comment/:recipe_id', comments.add);
+}
+
+function authenticateUser(req, res, next){
+  if(!req.session.user_id){
+    res.redirect("/doctors/login");
+  }else{
+    next();
+  }
 }
