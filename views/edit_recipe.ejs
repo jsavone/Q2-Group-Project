@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <form action="" method="post">
+  <form action="/recipe/update/<%=recipe.id%>" method="post">
     <p><input type="text" name="recipe_name" value="<%= recipe.recipe_name %>"></p>
       <p><input type="text" name="recipe_image" value="<%=recipe.recipe_image%>"></p>
       <div><textarea type="text" name="ingredients" rows="4" cols="50"> <%=recipe.ingredients%></textarea></div>

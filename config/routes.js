@@ -18,12 +18,14 @@ app.get('/recipe/upvote/:id', recipes.upvote);
 app.get('/recipe/downvote/:id', recipes.downvote);
 app.get('/recipe/save/:id', recipes.save);
 app.get('/recipe/edit/:id', recipes.recipeEdit);
+app.post('/recipe/update/:id', recipes.recipeUpdate);
 app.get('/create_recipe/:id',recipes.create_recipe);
 app.post('/create/recipe',recipes.add_recipe);
 app.post('/comment/:recipe_id', comments.add);
 app.get('/categories/:recipe_id', categories.add);
 app.post('/categories/:recipe_id', categories.insert);
 app.get('/categories/remove/:recipe_id/:category_id', categories.remove);
+app.get('/logout', users.logout);
 }
 
 function authenticateUser(req, res, next){
