@@ -13,7 +13,9 @@
       }
 
       .recipeContainer{
-        background-color: chocolate
+        background-color: chocolate;
+        height:100vh;
+        margin:0px auto
         
       }
       .fix{
@@ -39,9 +41,10 @@
       }
 
       .recipe {
+        text-align: center;
         margin: 10px auto;
         display: flex;
-        height: 200px;
+        /* height: 200px; */
         /* border: 2px solid black; */
         box-shadow: 0px 10px 15px 10px rgba(0,0,0,0.5);
         /* transition: 0.3s; */
@@ -50,6 +53,9 @@
         /* margin-top: 20px; */
         background-color: burlywood;
         width: 80%;
+        /* float: right; */
+        justify-content: center;
+        
       }
 
       .viewRecipe {
@@ -59,7 +65,12 @@
 
       .nav-link{
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size:xx-large;
+        font-size:large;
+        margin-left: 100px;
+      }
+
+      .dropdown{
+        float: right;
         margin-left: 200px;
       }
 
@@ -84,9 +95,20 @@
             <li class="nav-item active">
               <a class="nav-link disabled" href="/">Home</a>
             </li>
+
+
+          <!-- <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Categories
+                </button>
+            <div class="dropdown-menu">
             <li class="nav-item">
-              <a class="nav-link disabled"  href="#">Categories</a>
+              <a class="dropdown-item"  href="'/categories/:recipe_id'">Categories</a>
+              <a class="dropdown-item"  href="'/categories/:recipe_id'">Categories</a>
+              <a class="dropdown-item"  href="'/categories/:recipe_id'">Categories</a>
             </li>
+            </div>
+          </div> -->
             <li class="nav-item active">
               <a class="nav-link" href="/users/login">Login</a>
             </li>
@@ -94,6 +116,20 @@
               <a class="nav-link " href="/users/register">Register</a>
             </li>
           </ul>
+
+          <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Categories
+                </button>
+            <div class="dropdown-menu">
+            <li class="nav-item">
+              <a class="dropdown-item"  href="'/categories/:recipe_id'">Categories</a>
+              <a class="dropdown-item"  href="'/categories/:recipe_id'">Categories</a>
+              <a class="dropdown-item"  href="'/categories/:recipe_id'">Categories</a>
+            </li>
+            </div>
+          </div>
+
       </div>
     </nav>
 <body>
@@ -104,19 +140,19 @@
     <!-- </header> -->
     <div class="recipeContainer">
         <% for(let i = 0; i < recipes.length; i++) { %>
-          <div class="recipe">
-            <div class="recipeImage">
+          <div class="recipe row">
+            <div class="recipeImage col-md-3">
               <img src="<%=recipes[i].recipe_image%>" alt="recipe image">
             </div>
-            <div class="recipeInfo">
+            <div class="recipeInfo col-md-3">
               <h2><%=recipes[i].recipe_name%></h2>
               <p>by - <%=recipes[i].name%></p>
             </div>
-            <div class="recipeVotes">
+            <div class="recipeVotes col-md-3">
               <p>Total Votes:</p>
               <h1><%=recipes[i].total_votes%></h1>
             </div>
-            <div class="viewRecipe">
+            <div class="viewRecipe col-md-3">
               <a class="primary" href="/recipe/<%=recipes[i].id%>">View</a>
             </div>
           </div>
