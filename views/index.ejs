@@ -11,6 +11,7 @@
         width: 200px;
       }
     </style>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <title>Cooks Club</title>
   </head>
   <body>
@@ -36,7 +37,7 @@
           <div class="recipeInfo">
             <h2><%=recipes[i].recipe_name%></h2>
             <p>by - <%=recipes[i].name%></p>
-            <a href="/recipe/<%=recipes[i].id%>">View</a>
+            <a class="primary" href="/recipe/<%=recipes[i].id%>">View</a>
           </div>
           <div class="recipeVotes">
             <h1><%=recipes[i].total_votes%></h1>
@@ -45,7 +46,12 @@
       </div>
 
     </div>
-
-
+    <div class="alert alert-primary" role="alert">
+      A simple primary alert—check it out!
+    </div>
+    <div class="alert alert-danger" role="alert">
+  A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
   </body>
 </html>

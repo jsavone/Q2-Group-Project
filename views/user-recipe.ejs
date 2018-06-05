@@ -3,9 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Recipe</title>
+    <style media="screen">
+      img {
+        width: 400px;
+      }
+    </style>
   </head>
   <body>
     <h1><%=recipe.recipe_name%></h1>
     <p>by - <%=recipe.name%></p>
+    <img src="<%=recipe.recipe_image%>">
+    <p>Prep Time: <%=recipe.prep_time%></p>
+    <p>Cook Time: <%=recipe.cook_time%></p>
+    <h3>Ingredients:</h3>
+    <p><%=recipe.ingredients%></p>
+    <h3>Directions:</h3>
+    <p><%=recipe.directions%></p>
+    <h3>Total Votes: <%=recipe.total_votes%></h3>
+    <h3>Comments:</h3>
+      <div class="commentsContainer">
+        <% for (let i = 0; i < comments.length; i++) { %>
+          <div class="comment">
+            <p><%=comments[i].comment%></p>
+            <p>by - <%=comments[i].user_name%></p>
+          </div>
+
+        <% } %>
+        <% if (session_user) { %>
+        <div class="commentForm">
+          <form action="/comment/<%=recipe.id%>" method="post">
+            <textarea name="comment" placeholder="Comment"></textarea>
+            <input type="hidden" name="user_id" value="<%=session_user%>">
+            <input type="submit">
+          </form>
+        </div>
+        <% } %>
+      </div>
   </body>
 </html>

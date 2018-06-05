@@ -5,8 +5,14 @@ module.exports = {
 
   view: function(req, res) {
     knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').where('recipes.id', req.params.id).then((recipe) => {
-      // res.json(recipe[0])
-      res.render('user-recipe', {recipe:recipe[0]});
+      knex('comments').join('users', 'users.id', 'comments.user_id').where('comments.recipe_id', req.params.id).select('comments.*', 'users.name as user_name').then((comments) => {
+        // res.json(comments)
+        if (req.session.user_id) {
+            res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user:req.session.user_id})
+          }else{
+            res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user: null});
+          }
+      })
     })
 
   },
