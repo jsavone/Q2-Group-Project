@@ -38,14 +38,41 @@ module.exports = {
   },
 
   upvote: (req, res) => {
-    knex('recipes').where('id', req.params.id).increment('total_votes').then(() => {
-      res.redirect('/recipe/'+req.params.id)
+    knex('votes').where('recipe_id', req.params.id).where('user_id', req.session.user_id).then((vote) => {
+      if(vote.length>=1 && vote[0].vote=='up') {
+        res.redirect('/recipe/'+req.params.id)
+        return
+      }else{
+        knex('votes').insert({
+          recipe_id: req.params.id,
+          user_id: req.session.user_id,
+          vote: 'up'
+        }).then(() => {
+          knex('recipes').where('id', req.params.id).increment('total_votes').then(() => {
+            res.redirect('/recipe/'+req.params.id)
+          })
+        })
+      }
     })
+
   },
 
   downvote: (req, res) => {
-    knex('recipes').where('id', req.params.id).decrement('total_votes').then(() => {
-      res.redirect('/recipe/'+req.params.id)
+    knex('votes').where('recipe_id', req.params.id).where('user_id', req.session.user_id).then((vote) => {
+      if(vote.length>=1 && vote[0].vote=='down') {
+        res.redirect('/recipe/'+req.params.id)
+        return
+      }else{
+        knex('votes').insert({
+          recipe_id: req.params.id,
+          user_id: req.session.user_id,
+          vote: 'down'
+        }).then(() => {
+          knex('recipes').where('id', req.params.id).decrement('total_votes').then(() => {
+            res.redirect('/recipe/'+req.params.id)
+          })
+        })
+      }
     })
   },
 
