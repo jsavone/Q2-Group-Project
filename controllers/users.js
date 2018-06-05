@@ -3,9 +3,12 @@ const knex = require("../db/knex.js");
 module.exports = {
   // CHANGE ME TO AN ACTUAL FUNCTION
 
-  render: function(req, res) {
-    res.render("newusers");
+  newUsers: function(req, res) {
+    res.render("register");
   },
+  existingUsers: function(req,res){
+res.render("login");
+},
 
   index: function(req, res) {
     knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').then((recipes) => {
@@ -31,7 +34,7 @@ module.exports = {
       if(user.password===req.body.password){ //store the user id in session
         req.session.user_id=user.id;
         req.session.save(()=>{
-          res.redirect("/recipe/:id");
+          res.redirect("/user-profile");
         })
       }else {
         res.redirect('/');
@@ -39,5 +42,21 @@ module.exports = {
       }).catch(()=>{
         res.redirect('/');
     })
-}
+},
+
+
+  profile: function(req, res) {
+    knex("users").where("id", req.session.user_id)
+      .then((results) => {
+        knex("recipes").where({
+          user_id: req.session.user_id
+          })
+          .then((data) => {
+            res.render("user-profile", {
+              user: results[0],
+              recipe: data
+            });
+          })
+      })
+  },
 }
