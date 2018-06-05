@@ -2,9 +2,7 @@
 const users = require("../controllers/users.js")
 const recipes = require("../controllers/recipes.js")
 const comments = require("../controllers/comments.js")
-
 module.exports = function(app){
-
 app.get('/', users.index);
 app.get('/users/login', users.existingUsers);
 app.get('/users/register', users.newUsers);
@@ -12,17 +10,8 @@ app.post('/register', users.register);
 app.post('/login', users.login);
 app.get('/recipe/:id', recipes.view);
 app.use(authenticateUser);
-app.get('/existingusers_profile', users.profile);
-}
-
-<<<<<<< HEAD
-function authenticateUser(req, res, next) {
-  if (!req.session.doctor_id) {
-    res.redirect('/')
-  } else {
-=======
-app.get('/recipe/:id', recipes.view)
-app.use(authenticateUser);
+app.get('/existingusers_profile/:id', users.profile);
+app.get('/view/recipe/:id', users.details);
 app.get('/recipe/delete/:id', recipes.delete)
 app.get('/recipe/upvote/:id', recipes.upvote);
 app.get('/recipe/downvote/:id', recipes.downvote);
@@ -36,7 +25,7 @@ function authenticateUser(req, res, next){
   if(!req.session.user_id){
     res.redirect("/users/login");
   }else{
->>>>>>> 9e8f832ac8b9d7986d8f23f193793bf73ec6bf03
+
     next();
   }
 }

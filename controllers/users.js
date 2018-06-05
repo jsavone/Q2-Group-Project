@@ -34,7 +34,7 @@ res.render("login");
       if(user.password===req.body.password){ //store the user id in session
         req.session.user_id=user.id;
         req.session.save(()=>{
-          res.redirect("/user-profile");
+          res.redirect(`/existingusers_profile/${user.id}`);
         })
       }else {
         res.redirect('/');
@@ -45,16 +45,32 @@ res.render("login");
 },
 
 
-  profile: function(req, res) {
+  profile: async function(req, res) {
+    const users = await knex("users").where("id", req.session.user_id);
+    const recipe = await knex("recipes").where({user_id: req.session.user_id});
+    const saved_recipes = await knex("saved_recipes").where({user_id: req.session.user_id});
+    const finalSavedRecipes = await Promise.all(saved_recipes.map(saved_recipe =>
+                              knex("recipes").where({id: saved_recipe.recipe_id}).first()
+                            )) ;
+    console.log('finalSavedRecipes ', finalSavedRecipes)
+    res.render("user-profile", {
+      user: users[0],
+      recipe,
+      saved_recipes: finalSavedRecipes,
+    });
+  },
+
+  details: function(req, res) {
     knex("users").where("id", req.session.user_id)
       .then((results) => {
         knex("recipes").where({
-          user_id: req.session.user_id
+          user_id: req.session.user_id,
+          id: req.params.id
           })
           .then((data) => {
-            res.render("user-profile", {
+            res.render("recipe-details", {
               user: results[0],
-              recipe: data
+              recipe: data[0]
             });
           })
       })

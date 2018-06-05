@@ -9,10 +9,49 @@
         font-size: 20px;
         margin:10px;
       }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        width: 80%;
+      }
+
+      .card {
+        margin: 30px;
+        text-align: center;
+        flex: 1;
+        border: 1px solid black;
+        width: 250px;
+        max-width: 250px;
+      }
+      .aligncenter{
+          display: block;
+      }
       </style>
   </head>
   <body>
-    hello
+    <h1>My recipe</h1>
+    <div class="container">
+      <% for(let i = 0; i<recipe.length; i++){ %>
+        <div class="card">
+          <h1 ><%= recipe[i].recipe_name %></h1>
+          <img src="<%=recipe[i].recipe_image%>" style="height:200px; width:200px">
+          <a href="/view/recipe/<%= recipe[i].id%>" class ="aligncenter">View</a>
+        </div>
+        <% } %>
+    </div>
+    <hr/>
+    <h1>Saved recipe</h1>
+    <div class="container">
+      <% for(let i = 0; i<saved_recipes.length; i++){ %>
+        <div class="card">
+          <h1 ><%= saved_recipes[i].recipe_name %></h1>
+          <img src="<%=saved_recipes[i].recipe_image%>" style="height:200px; width:200px">
+          <a href="/view/recipe/<%= saved_recipes[i].id%>" class ="aligncenter">View</a>
+        </div>
+        <% } %>
+    </div>
+
 
 </body>
 </html>
