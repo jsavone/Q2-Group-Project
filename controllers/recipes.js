@@ -5,13 +5,14 @@ module.exports = {
 
   view: (req, res) => {
     req.session.enable_edit = false;
-    knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').where('recipes.id', req.params.id).then((recipe) => {
+    knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id', 'users.admin as user_admin').where('recipes.id', req.params.id).then((recipe) => {
       knex('comments').join('users', 'users.id', 'comments.user_id').where('comments.recipe_id', req.params.id).select('comments.*', 'users.name as user_name').then((comments) => {
         if (req.session.user_id == recipe[0].user_id) {
           req.session.enable_edit = true;
         }
         if (req.session.user_id) {
-            res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user:req.session.user_id, enable_edit: req.session.enable_edit})
+            res.render('user-recipe', {recipe:recipe[0], comments: comments,
+             session_user:req.session.user_id, enable_edit: req.session.enable_edit})
           }else{
             res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user: null});
           }

@@ -22,7 +22,7 @@
   <body>
     <a href="/"><img class="logo" src="https://seeklogo.com/images/R/restaurant-logo-7B8FF68CBF-seeklogo.com.png"></a>
 
-    <% if (enable_edit) { %>
+    <% if (enable_edit || recipe.user_admin) { %>
       <a href="/recipe/edit/<%=recipe.id%>">Edit</a>
       <a href="/recipe/delete/<%=recipe.id%>">Delete</a>
     <% } %>

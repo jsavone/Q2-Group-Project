@@ -36,7 +36,7 @@
         <div class="card">
           <h1 ><%= recipe[i].recipe_name %></h1>
           <img src="<%=recipe[i].recipe_image%>" style="height:200px; width:200px">
-          <a href="/view/recipe/<%= recipe[i].id%>" class ="aligncenter">View</a>
+          <a href="/recipe/<%= recipe[i].id%>" class ="aligncenter">View</a>
         </div>
         <% } %>
     </div>
@@ -47,7 +47,7 @@
         <div class="card">
           <h1 ><%= saved_recipes[i].recipe_name %></h1>
           <img src="<%=saved_recipes[i].recipe_image%>" style="height:200px; width:200px">
-          <a href="/view/recipe/<%= saved_recipes[i].id%>" class ="aligncenter">View</a>
+          <a href="/recipe/<%= saved_recipes[i].id%>" class ="aligncenter">View</a>
         </div>
         <% } %>
     </div>
