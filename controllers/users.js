@@ -37,12 +37,16 @@ module.exports = {
   },
   login:function(req,res){
     req.session.errors = null
+    req.session.admin = null
     knex('users').where("email", req.body.email).then((results)=>{
       let user=results[0];
       if(user.password===req.body.password){ //store the user id in session
         req.session.user_id=user.id;
+        if (user.admin) {
+          req.session.admin = true;
+        }
         req.session.save(()=>{
-          res.redirect(`/existingusers_profile/${user.id}`);
+          res.redirect(`/existingusers_profile`);
         })
       }  else{
           req.session.errors = "Email or Password was invalid";

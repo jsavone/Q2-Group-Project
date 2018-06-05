@@ -5,8 +5,11 @@ module.exports = {
 
   view: (req, res) => {
     req.session.enable_edit = false;
-    knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id', 'users.admin as user_admin').where('recipes.id', req.params.id).then((recipe) => {
+    knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').where('recipes.id', req.params.id).then((recipe) => {
       knex('comments').join('users', 'users.id', 'comments.user_id').where('comments.recipe_id', req.params.id).select('comments.*', 'users.name as user_name').then((comments) => {
+        if (req.session.admin == true) {
+          req.session.enable_edit = true;
+        }
         if (req.session.user_id == recipe[0].user_id) {
           req.session.enable_edit = true;
         }
@@ -14,7 +17,7 @@ module.exports = {
             res.render('user-recipe', {recipe:recipe[0], comments: comments,
              session_user:req.session.user_id, enable_edit: req.session.enable_edit})
           }else{
-            res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user: null});
+            res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user: null, enable_edit: null});
           }
       })
     })
@@ -42,6 +45,12 @@ module.exports = {
       if(vote.length>=1 && vote[0].vote=='up') {
         res.redirect('/recipe/'+req.params.id)
         return
+      }else if (vote.length>=1 && vote[0].vote=='down'){
+        knex('votes').where('recipe_id', req.params.id).where('user_id', req.session.user_id).update({vote:'up'}).then(() => {
+          knex('recipes').where('id', req.params.id).increment('total_votes').then(() => {
+            res.redirect('/recipe/'+req.params.id)
+          })
+        })
       }else{
         knex('votes').insert({
           recipe_id: req.params.id,
@@ -62,6 +71,12 @@ module.exports = {
       if(vote.length>=1 && vote[0].vote=='down') {
         res.redirect('/recipe/'+req.params.id)
         return
+      }else if (vote.length>=1 && vote[0].vote=='up'){
+        knex('votes').where('recipe_id', req.params.id).where('user_id', req.session.user_id).update({vote:'down'}).then(() => {
+          knex('recipes').where('id', req.params.id).decrement('total_votes').then(() => {
+            res.redirect('/recipe/'+req.params.id)
+          })
+        })
       }else{
         knex('votes').insert({
           recipe_id: req.params.id,
