@@ -7,7 +7,10 @@ module.exports = {
     res.render("register");
   },
   existingUsers: function(req,res){
-res.render("login");
+    if(!req.session.errors){
+      req.session.errors = [];
+    }
+res.render("login", {errors: req.session.errors});
 },
 
   index: function(req, res) {
@@ -26,7 +29,10 @@ res.render("login");
       password:req.body.password
     }).then(()=>{
       res.redirect('/users/login');
+    }).catch(()=>{
+      req.session.errors.push("Register was invalid");
     })
+
   },
   login:function(req,res){
     knex('users').where("email", req.body.email).then((results)=>{
@@ -36,13 +42,26 @@ res.render("login");
         req.session.save(()=>{
           res.redirect(`/existingusers_profile/${user.id}`);
         })
-      }else {
-        res.redirect('/');
-      }
-      }).catch(()=>{
-        res.redirect('/');
+      }  else{
+          req.session.errors.push("Email or Password was invalid");
+          req.session.save(()=>{
+            res.redirect("/users/login");
+          })
+        }
+}).catch(()=>{
+      req.session.errors.push("Email or Password was invalid");
+      req.session.save(()=>{
+        res.redirect("/users/login");
+      })
     })
-},
+  },
+    //   }else {
+    //     res.redirect('/');
+    //   }
+    //   }).catch(()=>{
+    //     res.redirect('/');
+    // })
+
 
 
   profile: async function(req, res) {
