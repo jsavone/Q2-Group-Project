@@ -12,7 +12,7 @@ app.post('/register', users.register);
 app.post('/login', users.login);
 app.get('/recipe/:id', recipes.view);
 app.use(authenticateUser);
-app.get('/existingusers_profile/:id', users.profile);
+app.get('/existingusers_profile', users.profile);
 app.get('/recipe/delete/:id', recipes.delete)
 app.get('/recipe/upvote/:id', recipes.upvote);
 app.get('/recipe/downvote/:id', recipes.downvote);
