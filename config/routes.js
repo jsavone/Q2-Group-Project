@@ -20,6 +20,7 @@ app.post('/recipe/update/:id', recipes.recipeUpdate);
 app.get('/create_recipe/:id',recipes.create_recipe);
 app.post('/create/recipe',recipes.add_recipe);
 app.post('/comment/:recipe_id', comments.add);
+  app.get('/logout', users.logout);
 
 }
 
