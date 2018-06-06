@@ -1,8 +1,8 @@
 const knex = require("../db/knex.js");
 const AWS = require('aws-sdk');
 AWS.config.loadFromPath('./config.json');
-var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project-1"}});
-const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project-1/"
+var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project"}});
+const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2group-project/"
 const hasher = require("../config/hasher");
 
 
