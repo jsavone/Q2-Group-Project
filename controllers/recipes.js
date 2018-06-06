@@ -1,4 +1,5 @@
 const knex = require("../db/knex.js");
+
 const AWS = require('aws-sdk');
 AWS.config.loadFromPath('./config.json');
 
@@ -7,6 +8,7 @@ const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2group-project/"
 
 var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project1"}});
 const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project1/"
+
 
 
 module.exports = {
@@ -36,20 +38,21 @@ module.exports = {
   },
 
   add_recipe: function(req, res){
-    let uploadData = {
-      Key: req.body.recipe_name,
-      Body: req.files.upload.data,
-      ContentType: req.files.upload.mimetype,
-      ACL: 'public-read'
-    }
-    s3Bucket.putObject(uploadData, function(err, data){
-      if(err){
-        console.log(err);
-        return;
-      }
+    // let uploadData = {
+    //   Key: req.body.recipe_name,
+    //   Body: req.files.upload.data,
+    //   ContentType: req.files.upload.mimetype,
+    //   ACL: 'public-read'
+    // }
+    // s3Bucket.putObject(uploadData, function(err, data){
+    //   if(err){
+    //     console.log(err);
+    //     return;
+    //   }
     knex('recipes').insert({
       recipe_name: req.body.recipe_name,
-      recipe_image: baseAWSURL + uploadData.Key,
+      recipe_image: req.body.recipe_image,
+      // recipe_image: baseAWSURL + uploadData.Key,
       ingredients: req.body.ingredients,
       directions: req.body.directions,
       prep_time: req.body.prep_time,
@@ -58,7 +61,7 @@ module.exports = {
     }).then(()=> {
       res.redirect('/profile') //We will need to change this to redirect to user profile
     })
-  })
+  // })
   },
 
   upvote: (req, res) => {
