@@ -5,8 +5,8 @@ module.exports = {
 
   view: (req, res) => {
     req.session.enable_edit = false;
-    knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').where('recipes.id', req.params.id).then((recipe) => {
-      knex('comments').join('users', 'users.id', 'comments.user_id').where('comments.recipe_id', req.params.id).select('comments.*', 'users.name as user_name').then((comments) => {
+    knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id', 'users.img_url as user_image').where('recipes.id', req.params.id).then((recipe) => {
+      knex('comments').join('users', 'users.id', 'comments.user_id').where('comments.recipe_id', req.params.id).select('comments.*', 'users.name as user_name', 'users.img_url as user_image').then((comments) => {
         if (req.session.admin == true) {
           req.session.enable_edit = true;
         }
