@@ -33,6 +33,10 @@
         width: 400px;
       }
 
+      .userImage {
+        max-width: 40px;
+      }
+
       .logo {
         width: 150px;
       }
@@ -88,7 +92,7 @@
     <% } %>
 
     <h1><%=recipe.recipe_name%></h1>
-    <p>by - <%=recipe.name%></p>
+    <p>Recipe by: <img class="userImage" src="<%=recipe.user_image%>">  <%=recipe.name%></p>
     <img src="<%=recipe.recipe_image%>">
     <p>Prep Time: <%=recipe.prep_time%></p>
     <p>Cook Time: <%=recipe.cook_time%></p>
@@ -107,7 +111,7 @@
         <% for (let i = 0; i < comments.length; i++) { %>
           <div class="comment">
             <p><%=comments[i].comment%></p>
-            <p>by - <%=comments[i].user_name%></p>
+            <p>by - <img class="userImage" src="<%=comments[i].user_image%>">   <%=comments[i].user_name%></p>
           </div>
 
         <% } %>
