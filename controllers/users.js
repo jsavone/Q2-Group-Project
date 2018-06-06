@@ -1,4 +1,8 @@
 const knex = require("../db/knex.js");
+const AWS = require('aws-sdk');
+AWS.config.loadFromPath('./config.json');
+var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project-1"}});
+const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project-1/"
 
 module.exports = {
   // CHANGE ME TO AN ACTUAL FUNCTION
@@ -31,18 +35,29 @@ module.exports = {
 
   register:function(req,res){
     req.session.errors = null
+    let uploadData = {
+      Key: req.body.email,
+      Body: req.files.upload.data,
+      ContentType: req.files.upload.mimetype,
+      ACL: 'public-read'
+    }
+    s3Bucket.putObject(uploadData, function(err, data){
+      if(err){
+        console.log(err);
+        return;
+      }
     knex("users").insert({
       name:req.body.name,
       email:req.body.email,
       bio:req.body.bio,
-      img_url:req.body.img_url,
+      img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
       password:req.body.password
     }).then(()=>{
       res.redirect('/users/login');
     }).catch(()=>{
       req.session.errors.push("Register was invalid");
     })
-
+  })
   },
   login:function(req,res){
     req.session.errors = null
