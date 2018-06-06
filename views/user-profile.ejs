@@ -7,42 +7,33 @@
      <style media="screen">
       *{
         text-align: center;
-        font-size: 20px;
         /* margin:10px; */
       }
-      /* .container {
-        display: inline;
-        /* flex-wrap: wrap; */
-        /* margin: auto;
-        width: 80%;
-        border-radius: 5px;
-      } */
 
       .card {
+        font-size: 20px;
+        background-color: #F5F5F5;
         margin: 30px;
         text-align: center;
-        /* flex: 1; */
-        border: 1px solid black;
-        width: 250px;
-        max-width: 250px;
+        box-shadow: 0px 10px 15px 10px rgba(0,0,0,0.15);
+        min-width: 250px;
+        border-radius: 5px;
       }
-      .aligncenter{
+
+      .card img {
+        margin: 0 auto;
+      }
+      /* .aligncenter{
           display: block;
-      }
+      } */
 
       h1{
         font-size: 20px;
-
       }
 
-      /* .flex-container{
-        flex:1
-      } */
-
-      /* .row{
-       flex:1;
-       justify-content: center
-      } */
+      .flex-container{
+        padding-top: 10px;
+      }
 
       header{
         width:100vw;
@@ -50,14 +41,37 @@
       }
 
       body{
-        background-color: #F5F5F5;
+        background-color: #E0E0E0;
       }
-      .myRecipes {
+
+      .listTitle {
+        font-size: 25px;
+        display: block;
+        text-align: center;
+      }
+
+      .container {
         display: flex;
-        justify-content: center;
         flex-wrap: wrap;
       }
 
+      .logo {
+        width: 150px;
+        margin-left: 100px;
+      }
+      .nav-link{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size:large;
+        margin: 65px 0px 0px 20px;
+      }
+
+      .dropdown{
+        float: right;
+        margin-left: 20%;
+      }
+      #userImage {
+        margin-left: 20%;
+      }
 
       </style>
   </head>
@@ -66,7 +80,7 @@
 
       <header>
           <nav class="navbar navbar-expand-sm bg-dark navbar-dark fix">
-          <a class ="navbar-brand" href="#">
+          <a class ="navbar-brand" href="/">
             <img src="/cooks-club.png" alt="Logo" style="width:170px;height:100px"></a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -90,7 +104,7 @@
                     </li>
                     <% } %>
                   </ul>
-                 <img src="<%=user.img_url%>" style="height:100px; width:100px; float:right;">
+                 <img id="userImage" src="<%=user.img_url%>" style="height:100px; width:100px; float:right;">
 
                  </div>
                </div>
@@ -105,11 +119,10 @@
     <!-- <img src="<%=user.img_url%>" style="height:100px; width:100px; float:right;"> -->
 
    <div class="flex-container">
+     <h1 class="listTitle">My recipes</h1>
      <div class="myRecipes">
-        <h1>My recipes</h1>
-
           <div class="container">
-            <div class="row">
+
             <% for(let i = 0; i<recipe.length; i++){ %>
               <div class="card">
                 <h1 ><%= recipe[i].recipe_name %></h1>
@@ -119,17 +132,12 @@
 
 
             <% } %>
-            </div>
-          </div>   <!--col-->
+          </div>
       </div>
-
     <hr/>
+    <h1 class="listTitle">Saved recipes</h1>
     <div class="savedRecipes">
-
-      <div class="row">
-      <h1>Saved recipes</h1>
       <div class="container">
-        <div class="row">
         <% for(let i = 0; i<saved_recipes.length; i++){ %>
           <div class="card">
             <h1 ><%= saved_recipes[i].recipe_name %></h1>
@@ -137,14 +145,13 @@
             <a href="/recipe/<%= saved_recipes[i].id%>" class ="aligncenter">View</a>
           </div>
           <% } %>
-
-        </div>
       </div>
-
-    </div>  <!--col-->
   </div>
-
   </div>
-
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous" defer></script>
+  <script type="text/javascript" src="/js/bootstrap.js" defer></script>
 </body>
 </html>

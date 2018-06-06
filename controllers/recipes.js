@@ -44,7 +44,7 @@ module.exports = {
     //   }
     knex('recipes').insert({
       recipe_name: req.body.recipe_name,
-      recipe_image: req.body.recipe_image,
+      recipe_image: req.body.recipe_url,
       // recipe_image: baseAWSURL + uploadData.Key,
       ingredients: req.body.ingredients,
       directions: req.body.directions,
