@@ -112,7 +112,11 @@
         <% for (let i = 0; i < comments.length; i++) { %>
           <div class="comment">
             <p><%=comments[i].comment%></p>
-            <p>by - <img class="userImage" src="<%=comments[i].user_image%>">   <%=comments[i].user_name%></p>
+            <p>by - <img class="userImage" src="<%=comments[i].user_image%>">
+            <%=comments[i].user_name%></p>
+            <% if(admin) { %>
+            <a href="/comment/delete/<%=recipe.id%>/<%=comments[i].user_id%>">Delete</a>
+            <% } %>
           </div>
 
         <% } %>

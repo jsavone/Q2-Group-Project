@@ -1,8 +1,13 @@
 const knex = require("../db/knex.js");
 const AWS = require('aws-sdk');
 AWS.config.loadFromPath('./config.json');
+
 var s3Bucket = new AWS.S3({params: {Bucket: "q2group-project"}});
 const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2group-project/"
+
+var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project1"}});
+const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project1/"
+
 
 module.exports = {
   // CHANGE ME TO AN ACTUAL FUNCTION
@@ -19,7 +24,7 @@ module.exports = {
         }
         if (req.session.user_id) {
             res.render('user-recipe', {recipe:recipe[0], comments: comments,
-             session_user:req.session.user_id, enable_edit: req.session.enable_edit})
+             session_user:req.session.user_id, enable_edit: req.session.enable_edit, admin: req.session.admin || null})
           }else{
             res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user: null, enable_edit: null});
           }
