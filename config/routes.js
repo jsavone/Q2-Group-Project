@@ -23,6 +23,7 @@ app.post('/recipe/update/:id', recipes.recipeUpdate);
 app.get('/create_recipe/:id',recipes.create_recipe);
 app.post('/create/recipe',recipes.add_recipe);
 app.post('/comment/:recipe_id', comments.add);
+app.get('/comment/delete/:recipe_id/:comment_id', comments.delete);
 app.get('/categories/:recipe_id', categories.add);
 app.post('/categories/:recipe_id', categories.insert);
 app.get('/categories/remove/:recipe_id/:category_id', categories.remove);

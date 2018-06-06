@@ -19,7 +19,7 @@ module.exports = {
         }
         if (req.session.user_id) {
             res.render('user-recipe', {recipe:recipe[0], comments: comments,
-             session_user:req.session.user_id, enable_edit: req.session.enable_edit})
+             session_user:req.session.user_id, enable_edit: req.session.enable_edit, admin: req.session.admin || null})
           }else{
             res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user: null, enable_edit: null});
           }
