@@ -27,7 +27,9 @@
       }
 
       .recipeImage img{
-        width: 200px;
+        height: 130px;
+        max-width: 175px;
+        margin: 5px 0 5px 0;
       }
 
       .recipe {
@@ -111,7 +113,7 @@
           <% for(let i = 0; i < recipes.length; i++) { %>
             <div class="recipe row">
               <div class="recipeImage col-md-3">
-                <img src="<%=recipes[i].recipe_image%>" alt="recipe image">
+              <a href="/recipe/<%=recipes[i].id%>"><img src="<%=recipes[i].recipe_image%>" alt="recipe image"></a>
               </div>
               <div class="recipeInfo col-md-4">
                 <h2><%=recipes[i].recipe_name%></h2>
