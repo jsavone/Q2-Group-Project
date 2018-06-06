@@ -51,7 +51,6 @@ module.exports = {
 
   },
   register:function(req,res){
-<<<<<<< HEAD
     req.session.errors = null
     let uploadData = {
       Key: req.body.email,
@@ -70,26 +69,12 @@ module.exports = {
       bio:req.body.bio,
       img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
       password:req.body.password
-=======
-    req.session.errors = null;
-    hasher.hash(req.body).then((users) => {
-    knex("users").insert({
-      name:users.name,
-      email:users.email,
-      bio:users.bio,
-      img_url:users.img_url,
-      password:users.password
->>>>>>> 555a9287c414fb73cde6d97f4b52595ffcb129d1
     }).then(()=>{
       res.redirect('/users/login');
     }).catch(()=>{
       req.session.errors.push("Register was invalid");
     })
   })
-<<<<<<< HEAD
-=======
-
->>>>>>> 555a9287c414fb73cde6d97f4b52595ffcb129d1
   },
 
 
