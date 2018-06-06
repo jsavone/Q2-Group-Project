@@ -55,7 +55,7 @@ module.exports = {
           req.session.admin = true;
         }
         req.session.save(()=>{
-          res.redirect(`/existingusers_profile`);
+          res.redirect(`/profile`);
         })
       }  else{
           req.session.errors = "Email or Password was invalid";

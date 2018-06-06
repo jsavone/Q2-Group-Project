@@ -36,7 +36,7 @@ module.exports = {
       cook_time: req.body.cook_time,
       user_id: req.session.user_id
     }).then(()=> {
-      res.redirect('/existingusers_profile/'+req.session.user_id) //We will need to change this to redirect to user profile
+      res.redirect('/profile/'+req.session.user_id) //We will need to change this to redirect to user profile
     })
   },
 
