@@ -1,8 +1,8 @@
 const knex = require("../db/knex.js");
-const AWS = require('aws-sdk');
-AWS.config.loadFromPath('./config.json');
-var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project-1"}});
-const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project-1/"
+// const AWS = require('aws-sdk');
+// AWS.config.loadFromPath('./config.json');
+// var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project-1"}});
+// const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project-1/"
 const hasher = require("../config/hasher");
 
 
@@ -39,24 +39,25 @@ module.exports = {
 
     req.session.errors = null
 
-    let uploadData = {
-      Key: req.body.email,
-      Body: req.files.upload.data,
-      ContentType: req.files.upload.mimetype,
-      ACL: 'public-read'
-    }
-    s3Bucket.putObject(uploadData, function(err, data){
-      if(err){
-        console.log(err);
-        return;
-      }
+    // let uploadData = {
+    //   Key: req.body.email,
+    //   Body: req.files.upload.data,
+    //   ContentType: req.files.upload.mimetype,
+    //   ACL: 'public-read'
+    // }
+    // s3Bucket.putObject(uploadData, function(err, data){
+    //   if(err){
+    //     console.log(err);
+    //     return;
+    //   }
       hasher.hash(req.body).then((users) => {
 
     knex("users").insert({
       name:users.name,
       email:users.email,
       bio:users.bio,
-      img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
+      img_url: users.img_url,
+      // img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
       password:users.password
 }).then(()=>{
       res.redirect('/users/login');
@@ -64,7 +65,7 @@ module.exports = {
       req.session.errors.push("Register was invalid");
     })
   })
-})
+// })
 
   },
 
