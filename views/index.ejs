@@ -92,9 +92,11 @@
               <li class="nav-item active">
                 <a class="nav-link" href="/users/register">Register</a>
               </li>
+              <% if (user) { %>
               <li class="nav-item active">
-                <a class="nav-link" href="/existingusers_profile">Profile</a>
+                <a class="nav-link" href="/profile">Profile</a>
               </li>
+              <% } %>
             </ul>
 
             <div class="dropdown">
