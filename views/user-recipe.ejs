@@ -3,14 +3,30 @@
   <head>
     <meta charset="utf-8">
     <title>Recipe</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <style media="screen">
 
-      body {
-        text-align: center;
+      /* Nav CSS */
+      .logo {
+        width: 150px;
+        margin-left: 100px;
+      }
+      .nav-link{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size:large;
+        margin: 65px 0px 0px 20px;
       }
 
+      .dropdown{
+        float: right;
+        margin-left: 20%;
+      }
+      /* Nav CSS */
+      body {
+        background-color: #F5F5F5;
+      }
       main {
-        padding-left: 10px;
+        padding: 10px 0px 0px 10px;
       }
 
       img {
@@ -21,8 +37,19 @@
         width: 150px;
       }
 
+      h3 {
+        margin: 20px 0 15px 0;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      btn-primary {
+        display: block;
+        margin-bottom: 10px;
+      }
     </style>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
   <header>
@@ -55,9 +82,9 @@
   <body>
     <main>
     <% if (enable_edit) { %>
-      <a href="/recipe/edit/<%=recipe.id%>">Edit</a>
-      <a href="/categories/<%=recipe.id%>">Add Categories</a>
-      <a href="/recipe/delete/<%=recipe.id%>">Delete</a>
+      <a href="/recipe/edit/<%=recipe.id%>"><i class="fas fa-edit"></i> Edit | </a>
+      <a href="/categories/<%=recipe.id%>"><i class="far fa-plus-square"></i> Add Categories | </a>
+      <a href="/recipe/delete/<%=recipe.id%>"><i class="far fa-trash-alt"></i> Delete</a>
     <% } %>
 
     <h1><%=recipe.recipe_name%></h1>
@@ -87,9 +114,9 @@
         <% if (session_user) { %>
         <div class="commentForm">
           <form action="/comment/<%=recipe.id%>" method="post">
-            <textarea name="comment" placeholder="Comment"></textarea>
+            <textarea class="primary"name="comment" placeholder="Comment"></textarea>
             <input type="hidden" name="user_id" value="<%=session_user%>">
-            <input type="submit">
+            <input class="btn btn-primary"type="submit">
           </form>
         </div>
         <% } %>
