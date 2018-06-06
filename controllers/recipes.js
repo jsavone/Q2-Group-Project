@@ -24,7 +24,7 @@ module.exports = {
         }
         if (req.session.user_id) {
             res.render('user-recipe', {recipe:recipe[0], comments: comments,
-             session_user:req.session.user_id, enable_edit: req.session.enable_edit, admin: req.session.admin || null})
+             session_user:req.session.user_id, enable_edit: req.session.enable_edit})
           }else{
             res.render('user-recipe', {recipe:recipe[0], comments: comments, session_user: null, enable_edit: null});
           }
@@ -49,7 +49,7 @@ module.exports = {
     //   }
     knex('recipes').insert({
       recipe_name: req.body.recipe_name,
-      recipe_image: req.body.recipe_image,
+      recipe_image: req.body.recipe_url,
       // recipe_image: baseAWSURL + uploadData.Key,
       ingredients: req.body.ingredients,
       directions: req.body.directions,
