@@ -9,6 +9,10 @@
         text-align: center;
       }
 
+      main {
+        padding-left: 10px;
+      }
+
       img {
         width: 400px;
       }
@@ -19,6 +23,7 @@
 
     </style>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
   <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fix">
@@ -48,6 +53,7 @@
       </nav>
   </header>
   <body>
+    <main>
     <% if (enable_edit) { %>
       <a href="/recipe/edit/<%=recipe.id%>">Edit</a>
       <a href="/categories/<%=recipe.id%>">Add Categories</a>
@@ -65,9 +71,9 @@
     <p><%=recipe.directions%></p>
     <h3>Total Votes: <%=recipe.total_votes%></h3>
     <% if (session_user) { %>
-    <a href="/recipe/upvote/<%=recipe.id%>">Upvote</a>
-    <a href="/recipe/downvote/<%=recipe.id%>">Downvote</a>
-    <a href="/recipe/save/<%=recipe.id%>">Save Recipe</a>
+    <a href="/recipe/upvote/<%=recipe.id%>"><i class="far fa-arrow-alt-circle-up"></i> Upvote | </a>
+    <a href="/recipe/downvote/<%=recipe.id%>"><i class="far fa-arrow-alt-circle-down"></i> Downvote | </a>
+    <a href="/recipe/save/<%=recipe.id%>"><i class="far fa-bookmark"></i> Save Recipe</a>
     <% } %>
     <h3>Comments:</h3>
       <div class="commentsContainer">
@@ -92,6 +98,7 @@
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous" defer></script>
-      <script type="text/javascript" src="/js/bootstrap.js" defer></script>  
+      <script type="text/javascript" src="/js/bootstrap.js" defer></script>
+    </main>
   </body>
 </html>
