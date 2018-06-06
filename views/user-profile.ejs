@@ -8,15 +8,15 @@
       *{
         text-align: center;
         font-size: 20px;
-        margin:10px;
+        /* margin:10px; */
       }
-      .container {
+      /* .container {
         display: inline;
         /* flex-wrap: wrap; */
-        margin: auto;
+        /* margin: auto;
         width: 80%;
         border-radius: 5px;
-      }
+      } */
 
       .card {
         margin: 30px;
@@ -32,17 +32,17 @@
 
       h1{
         font-size: 20px;
-        
+
       }
 
-      .flex-container{
-        flex:1 
-      }
+      /* .flex-container{
+        flex:1
+      } */
 
-      .row{
+      /* .row{
        flex:1;
        justify-content: center
-      }
+      } */
 
       header{
         width:100vw;
@@ -52,8 +52,12 @@
       body{
         background-color: #F5F5F5;
       }
+      .myRecipes {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
 
-     
 
       </style>
   </head>
@@ -64,7 +68,7 @@
           <nav class="navbar navbar-expand-sm bg-dark navbar-dark fix">
           <a class ="navbar-brand" href="#">
             <img src="/cooks-club.png" alt="Logo" style="width:170px;height:100px"></a>
-        
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -73,7 +77,7 @@
                     <li class="nav-item active">
                       <a class="nav-link disabled" href="/">Home</a>
                     </li>
-      
+
                     <li class="nav-item active">
                       <a class="nav-link" href="/logout">Logout</a>
                     </li>
@@ -87,57 +91,58 @@
                     <% } %>
                   </ul>
                  <img src="<%=user.img_url%>" style="height:100px; width:100px; float:right;">
-                  
+
                  </div>
                </div>
             </nav>
         </header>
 
 
-<!-- 
+<!--
     <a href="/logout">Logout</a> <img src="<%=user.img_url%>" style="height:100px; width:100px; float:right;">
     <a href="/create_recipe/<%=recipe.id%>>">create recipe</a> -->
 
     <!-- <img src="<%=user.img_url%>" style="height:100px; width:100px; float:right;"> -->
 
    <div class="flex-container">
-    <div class="row">
+     <div class="myRecipes">
+        <h1>My recipes</h1>
 
-    <h1>My recipes</h1>
+          <div class="container">
+            <div class="row">
+            <% for(let i = 0; i<recipe.length; i++){ %>
+              <div class="card">
+                <h1 ><%= recipe[i].recipe_name %></h1>
+                <img src="<%=recipe[i].recipe_image%>" style="height:200px; width:200px">
+                <a href="/recipe/<%= recipe[i].id%>" class ="aligncenter">View</a>
+              </div>
 
-    <div class="container">
-      <div class="row">
-      <% for(let i = 0; i<recipe.length; i++){ %>
-        <div class="card">
-          <h1 ><%= recipe[i].recipe_name %></h1>
-          <img src="<%=recipe[i].recipe_image%>" style="height:200px; width:200px">
-          <a href="/recipe/<%= recipe[i].id%>" class ="aligncenter">View</a>
-        </div>
 
-     
-        <% } %>
-        </div>
-      </div>   <!--col--> 
-    </div>
+            <% } %>
+            </div>
+          </div>   <!--col-->
+      </div>
 
     <hr/>
-    <div class="row">
-    <h1>Saved recipes</h1>
-    <div class="container">
+    <div class="savedRecipes">
+
       <div class="row">
-      <% for(let i = 0; i<saved_recipes.length; i++){ %>
-        <div class="card">
-          <h1 ><%= saved_recipes[i].recipe_name %></h1>
-          <img src="<%=saved_recipes[i].recipe_image%>" style="height:200px; width:200px">
-          <a href="/recipe/<%= saved_recipes[i].id%>" class ="aligncenter">View</a>
+      <h1>Saved recipes</h1>
+      <div class="container">
+        <div class="row">
+        <% for(let i = 0; i<saved_recipes.length; i++){ %>
+          <div class="card">
+            <h1 ><%= saved_recipes[i].recipe_name %></h1>
+            <img src="<%=saved_recipes[i].recipe_image%>" style="height:200px; width:200px">
+            <a href="/recipe/<%= saved_recipes[i].id%>" class ="aligncenter">View</a>
+          </div>
+          <% } %>
+
         </div>
-        <% } %>
-
       </div>
-    </div>
 
-  </div>  <!--col--> 
-
+    </div>  <!--col-->
+  </div>
 
   </div>
 
