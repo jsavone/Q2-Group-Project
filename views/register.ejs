@@ -12,15 +12,15 @@
       </style>
   </head>
   <body>
-    
+
     <h1>Register</h1>
-    <form action="/register" method="post">
-        <p><input type="text" name="name" placeholder="Name"></p>
-      <p><input type="email" name="email" placeholder="Email"></p>
-      <p><input type="text" name="bio" placeholder="Bio"></p>
-        <p><input type="text" name="img_url" placeholder="Img URL"></p>
-      <p><input type="password" name="password" placeholder="Password"></p>
-      <p><button type="submit">Submit</button></p>
+    <form enctype="multipart/form-data" action="/register" method="post">
+      <input type="text" name="name" placeholder="Name">
+      <input type="email" name="email" placeholder="Email">
+      <input type="text" name="bio" placeholder="Bio">
+      <input type="file" name="upload" accept=".jpg, .jpeg, .png">
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Submit</button>
     </form>
 </body>
 </html>

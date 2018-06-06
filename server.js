@@ -3,10 +3,12 @@ const path = require("path");
 const app = express();
 const bodyParser = require('body-parser');
 const hasher = require('./config/hasher');
+const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 8000;
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(fileUpload());
 app.use(express.static(__dirname + '/public'));
 
 require('./config/sessions')(app);

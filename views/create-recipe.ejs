@@ -37,9 +37,9 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM9bEQKrsL_cJ1q3xgnYD20R1cx9uWa8--mqKSmyz-ZM7m_lY4kA" alt="">
          </div>
          <div class="col-4">
-           <form action="/create/recipe" method="post">
+           <form enctype="multipart/form-data" action="/create/recipe" method="post">
               <input type="text" name="recipe_name" placeholder="Recipe Name">
-              <input type="text" name="recipe_image" placeholder="Recipe Image URL">
+              <input type="file" name="upload" accept=".jpg, .jpeg, .png">
               <textarea name="ingredients" placeholder="Ingredients"></textarea>
               <textarea name="directions" placeholder="Directions"></textarea>
               <input type="text" name="prep_time" placeholder="Prep Time">
