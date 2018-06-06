@@ -3,6 +3,8 @@ const AWS = require('aws-sdk');
 AWS.config.loadFromPath('./config.json');
 var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project-1"}});
 const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project-1/"
+const hasher = require("../config/hasher");
+
 
 module.exports = {
   // CHANGE ME TO AN ACTUAL FUNCTION
@@ -32,8 +34,24 @@ module.exports = {
       })
     })
   },
+  register: (req, res) => {
+    hasher.hash(req.body).then((doctors) => {
+      knex("doctors").insert({
+        name: doctors.name,
+        email: doctors.email,
+        bio: doctors.bio,
+        img_url: doctors.img_url,
+        password: doctors.password
+      }).then(() => {
+        res.redirect('/doctors/login');
+      }).catch(() => {
+        req.session.errors.push("Register was invalid");
+      })
+    })
 
+  },
   register:function(req,res){
+<<<<<<< HEAD
     req.session.errors = null
     let uploadData = {
       Key: req.body.email,
@@ -52,32 +70,52 @@ module.exports = {
       bio:req.body.bio,
       img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
       password:req.body.password
+=======
+    req.session.errors = null;
+    hasher.hash(req.body).then((users) => {
+    knex("users").insert({
+      name:users.name,
+      email:users.email,
+      bio:users.bio,
+      img_url:users.img_url,
+      password:users.password
+>>>>>>> 555a9287c414fb73cde6d97f4b52595ffcb129d1
     }).then(()=>{
       res.redirect('/users/login');
     }).catch(()=>{
       req.session.errors.push("Register was invalid");
     })
   })
+<<<<<<< HEAD
+=======
+
+>>>>>>> 555a9287c414fb73cde6d97f4b52595ffcb129d1
   },
+
+
+
+
   login:function(req,res){
     req.session.errors = null
     req.session.admin = null
     knex('users').where("email", req.body.email).then((results)=>{
       let user=results[0];
-      if(user.password===req.body.password){ //store the user id in session
-        req.session.user_id=user.id;
-        if (user.admin) {
-          req.session.admin = true;
-        }
-        req.session.save(()=>{
-          res.redirect(`/profile`);
-        })
-      }  else{
-          req.session.errors = "Email or Password was invalid";
+      hasher.check(user, req.body).then((isMatch) => {
+        if (isMatch) {
+          req.session.user_id = user.id;
+          if (user.admin) {
+            req.session.admin = true;
+          }
+          req.session.save(() => {
+            res.redirect(`/profile`);
+          })
+        } else {
+        req.session.errors = "Email or Password was invalid";
           req.session.save(()=>{
             res.redirect("/users/login");
           })
         }
+      })
       }).catch(()=>{
             req.session.errors.push("Email or Password was invalid");
             req.session.save(()=>{
