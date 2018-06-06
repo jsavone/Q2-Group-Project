@@ -13,4 +13,11 @@ module.exports = {
       res.redirect('/recipe/'+req.params.recipe_id);
     })
   },
+
+  delete: function(req, res) {
+    knex('comments').where('id', req.params.comment_id).del()
+    .then(() => {
+      res.redirect('/recipe/'+req.params.recipe_id);
+    })
+  },
 }
