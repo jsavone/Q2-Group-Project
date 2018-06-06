@@ -16,7 +16,7 @@ module.exports = {
   index: function(req, res) {
     knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').orderBy('recipes.total_votes', 'desc').then((recipes) => {
       knex('categories').then((categories) => {
-        res.render("index", {recipes:recipes, categories:categories});
+        res.render("index", {recipes:recipes, categories:categories, user: req.session.user_id || null});
       })
     })
   },
