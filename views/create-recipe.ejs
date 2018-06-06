@@ -2,10 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+   
     <style>
         h1{
             font-family: sans-serif;
@@ -18,18 +19,73 @@
         input{
             width:50%;
             padding: 12px 20px;
-            margin: 8px 0;
+            margin: 15px 0 20px 0;
             box-sizing: border-box;
+            
 
         }
         img{
             float:left;
             margin-left: 50px;
         }
+        body{
+            background-color: #E0E0E0;
+        }
+
+        .logo {
+                width: 150px;
+                 margin-left: 100px;
+        }
+      .nav-link{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size:large;
+        margin: 65px 0px 0px 20px;
+      }
+
+      .dropdown{
+        float: right;
+        margin-left: 20%;
+      }
+
+      textarea{
+        margin: 15px 0 20px 0;
+
+          
+
+      }
 
     </style>
 </head>
 <body>
+
+        <header>
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark fix">
+                <a class ="navbar-brand" href="/">
+                  <img src="/cooks-club.png" alt="Logo" style="width:170px;height:100px"></a>
+            
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                          <li class="nav-item active">
+                            <a class="nav-link disabled" href="/">Home</a>
+                          </li>
+            
+                          <li class="nav-item active">
+                            <a class="nav-link" href="/logout">Logout</a>
+                          </li>
+                          </li>
+                          <li class="nav-item active">
+                            <a class="nav-link" href="/profile">Profile</a>
+                          </li>
+                        </ul>
+                     </div>
+                  </nav>
+              </header>
+
+
+
     <h1>CREATE RECIPE</h1>
 <div class="container">
     <div class="row">
@@ -37,23 +93,31 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM9bEQKrsL_cJ1q3xgnYD20R1cx9uWa8--mqKSmyz-ZM7m_lY4kA" alt="">
          </div>
          <div class="col-4">
-           <form enctype="multipart/form-data" action="/create/recipe" method="post">
-              <input type="text" name="recipe_name" placeholder="Recipe Name">
-              <!-- <input type="file" name="upload" accept=".jpg, .jpeg, .png"> -->
-              <input type="text" name="recipe_url" placeholder="Image URL">
-              <textarea name="ingredients" placeholder="Ingredients"></textarea>
-              <textarea name="directions" placeholder="Directions"></textarea>
-              <input type="text" name="prep_time" placeholder="Prep Time">
-              <input type="text" name="cook_time" placeholder="Cook Time">
-              <input type="submit" class="btn btn-primary" value="Create">
-            </form>
-            </div>
+             <div class="formSpace">
+                <form enctype="multipart/form-data" action="/create/recipe" method="post">
+                    <input type="text" name="recipe_name" placeholder="Recipe Name"> 
+                    <!-- <input type="file" name="upload" accept=".jpg, .jpeg, .png"> -->
+                    <input type="text" name="recipe_url" placeholder="Image URL"> 
+                    <textarea name="ingredients" placeholder="Ingredients"></textarea> 
+                    <textarea name="directions" placeholder="Directions"></textarea>  
+                     <input type="text" name="prep_time" placeholder="Prep Time">   
+                    <input type="text" name="cook_time" placeholder="Cook Time">  
+                    <input type="submit" class="btn btn-primary" value="Create">
+                </form>
+             </div>
+        </div>
+
         <div class="col-4">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMhmSKubSKK1v1hqH6Od-EIgYIdHbpLnCjI68LIgvK0lR_0oIyfw" alt="">
             </div>
        </div>
     </div>
 </div>
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous" defer></script>
 
 <script type="text/javascript" src="/js/bootstrap.js">
 </script>
