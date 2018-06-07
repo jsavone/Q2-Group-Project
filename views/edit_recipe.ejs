@@ -76,15 +76,15 @@
         </nav>
     </header>
     <h1>Edit Recipe</h1>
-  <form action="/recipe/update/<%=recipe.id%>" method="post">
-    <input type="text" name="recipe_name" value="<%= recipe.recipe_name %>">
-    <input type="text" name="recipe_image" value="<%=recipe.recipe_image%>">
-    <textarea type="text" name="ingredients"> <%=recipe.ingredients%></textarea>
-    <textarea type="text" name="directions"><%=recipe.directions%></textarea>
-    <input type="text" name="prep_time" value="<%= recipe.prep_time %>">
-    <input type="text" name="cook_time" value="<%= recipe.cook_time %>">
-    <input class="btn btn-primary"type="submit" value="Update">
-  </form>
+    <form action="/recipe/update/<%=recipe.id%>" method="post">
+      <input type="text" name="recipe_name" value="<%= recipe.recipe_name %>">
+      <input type="text" name="recipe_image" value="<%=recipe.recipe_image%>">
+      <textarea type="text" name="ingredients"> <%=recipe.ingredients%></textarea>
+      <textarea type="text" name="directions"><%=recipe.directions%></textarea>
+      <input type="text" name="prep_time" value="<%= recipe.prep_time %>">
+      <input type="text" name="cook_time" value="<%= recipe.cook_time %>">
+      <input class="btn btn-primary"type="submit" value="Update">
+    </form>
 
 </body>
 
