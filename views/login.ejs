@@ -53,6 +53,7 @@
       </style>
   </head>
   <body>
+
     <header>
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fix">
       <a class ="navbar-brand" href="#">
@@ -72,9 +73,13 @@
     <div class ="loginContainer">
       <div class ="login">
 
+
     <h1>Login</h1>
     <% if (errors) { %>
       <p><%=errors%></p>
+    <% } %>
+    <% if (success) { %>
+      <p><%=success%></p>
     <% } %>
     <form action="/login" method="post">
       <p><input type="email" name="email" placeholder="Email"></p>

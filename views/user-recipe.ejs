@@ -25,12 +25,16 @@
       body {
         background-color: #F5F5F5;
       }
+
       main {
-        padding: 10px 0px 0px 10px;
+        padding: 15px 0px 0px 20px;
       }
 
-      img {
+      #recipeImage {
+        border-radius: 3%;
         width: 400px;
+        box-shadow: 0px 5px 7px 5px rgba(0,0,0,0.15);
+
       }
 
       .userImage {
@@ -42,18 +46,54 @@
         width: 150px;
       }
 
+      h1 {
+        margin-top: 7px;
+        font-weight: 400;
+      }
+
       h3 {
-        margin: 20px 0 15px 0;
+        margin: 25px 0 15px 0;
+        font-weight: 400;
       }
 
       a:hover {
         text-decoration: none;
       }
 
-      btn-primary {
+      .commentHR {
+        margin: 0;
+      }
+
+      .deleteLink {
+        margin: 0;
+      }
+
+      .comment {
+        width: 50%;
+      }
+
+      .comment p {
+        margin-bottom: 7px;
+      }
+
+      textarea {
+        width: 50%;
+        height: 100px;
         display: block;
         margin-bottom: 10px;
       }
+
+      input {
+        margin-right: 50%;
+        float: right;
+        margin-bottom: 20px;
+      }
+
+      #time {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
     </style>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
@@ -94,9 +134,8 @@
 
     <h1><%=recipe.recipe_name%></h1>
     <p>Recipe by: <img class="userImage" src="<%=recipe.user_image%>">  <%=recipe.name%></p>
-    <img src="<%=recipe.recipe_image%>">
-    <p>Prep Time: <%=recipe.prep_time%></p>
-    <p>Cook Time: <%=recipe.cook_time%></p>
+    <img id="recipeImage" src="<%=recipe.recipe_image%>">
+    <p id="time"><i class="far fa-clock"></i> Prep Time: <%=recipe.prep_time%> | Cook Time: <%=recipe.cook_time%></p>
     <h3>Ingredients:</h3>
     <p><%=recipe.ingredients%></p>
     <h3>Directions:</h3>
@@ -114,9 +153,12 @@
             <p><%=comments[i].comment%></p>
             <p>by - <img class="userImage" src="<%=comments[i].user_image%>">
             <%=comments[i].user_name%></p>
-             <!-- if(admin) { 
-            <a href="/comment/delete/<%=recipe.id%>/<%=comments[i].user_id%>">Delete</a>
-             }  -->
+            <% if(enable_edit) { %>
+            <a class="deleteLink" href="/comment/delete/<%=recipe.id%>/<%=comments[i].id%>">Delete</a>
+            <% } %>
+              <div class="commentHR"><hr>
+              </div>
+            </div>
           </div>
 
         <% } %>

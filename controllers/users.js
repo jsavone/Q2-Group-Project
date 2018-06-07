@@ -1,8 +1,10 @@
 const knex = require("../db/knex.js");
+
 // const AWS = require('aws-sdk');
 // AWS.config.loadFromPath('./config.json');
 // var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project-1"}});
 // const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project-1/"
+
 const hasher = require("../config/hasher");
 
 
@@ -10,16 +12,37 @@ module.exports = {
   // CHANGE ME TO AN ACTUAL FUNCTION
 
   newUsers: function(req, res) {
-    res.render("register");
-  },
-  existingUsers: function(req,res){
-    if(!req.session.errors){
+    if(!req.session.errors) {
       req.session.errors = null;
+      req.session.save(() => {
+        res.render("register", {errors: req.session.errors});
+      })
+    }else {
+      res.render("register", {errors: req.session.errors});
     }
-    res.render("login", {errors: req.session.errors});
-    },
+  },
+
+  existingUsers: function(req,res){
+    if(req.session.success) {
+      res.render("login", {errors: req.session.errors = null, success: req.session.success})
+      req.session.save(() => {
+        req.session.success = null
+        req.session.errors = null
+      })
+    }else if (req.session.errors){
+      res.render("login", {errors: req.session.errors, success: req.session.success = null})
+      req.session.save(() => {
+        req.session.success = null
+        req.session.errors = null
+      })
+    }else{
+      res.render("login", {errors: req.session.errors=null, success: req.session.success = null})
+    }
+  },
 
   index: function(req, res) {
+      req.session.errors = null;
+      req.session.success = null;
     knex('recipes').join('users', 'users.id', 'recipes.user_id').select('recipes.*', 'users.name', 'users.id as users_id').orderBy('recipes.total_votes', 'desc').then((recipes) => {
       knex('categories').then((categories) => {
         res.render("index", {recipes:recipes, categories:categories, user: req.session.user_id || null});
@@ -36,8 +59,8 @@ module.exports = {
   },
 
   register:function(req,res){
-
-    req.session.errors = null
+    req.session.errors = null;
+    req.session.success = null;
 
     // let uploadData = {
     //   Key: req.body.email,
@@ -50,21 +73,30 @@ module.exports = {
     //     console.log(err);
     //     return;
     //   }
+    if(req.body.password == req.body.confirm) {
       hasher.hash(req.body).then((users) => {
+        knex("users").insert({
+          name:users.name,
+          email:users.email,
+          bio:users.bio,
+          img_url: users.img_url,
+          // img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
+          password:users.password
+        }).then(()=>{
+          req.session.success = "New user has been created! You may now log in."
+          req.session.errors = null;
+          req.session.save(() => {
+            res.redirect('/users/login');
+          })
+        })
+      })
+      }else{
+        req.session.errors = 'Confirm password did not match. Please try again.'
+        req.session.save(() => {
+          res.redirect('/users/register')
+        })
 
-    knex("users").insert({
-      name:users.name,
-      email:users.email,
-      bio:users.bio,
-      img_url: users.img_url,
-      // img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
-      password:users.password
-}).then(()=>{
-      res.redirect('/users/login');
-    }).catch(()=>{
-      req.session.errors.push("Register was invalid");
-    })
-  })
+      }
 // })
 
   },
@@ -74,6 +106,7 @@ module.exports = {
 
   login:function(req,res){
     req.session.errors = null;
+    req.session.success = null;
     req.session.admin = null;
     knex('users').where("email", req.body.email).then((results)=>{
       let user=results[0];
