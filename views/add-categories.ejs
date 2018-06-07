@@ -3,24 +3,56 @@
   <head>
     <meta charset="utf-8">
     <title>Add Categories</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <style media="screen">
-    /* Nav CSS */
-    .logo {
-      width: 150px;
-      margin-left: 100px;
-    }
-    .nav-link{
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size:large;
-      margin: 65px 0px 0px 20px;
-    }
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    .dropdown{
-      float: right;
-      margin-left: 20%;
-    }
-    /* Nav CSS */
+    <style>
+        body {
+          text-align: center;
+        }
+
+        h2 {
+            padding-top: 30px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        input{
+            width:50%;
+            padding: 12px 20px;
+            margin: 15px 0 20px 0;
+            box-sizing: border-box;
+
+
+        }
+        img{
+            float:left;
+            margin-left: 50px;
+        }
+        body{
+            background-color: #E0E0E0;
+        }
+
+        .logo {
+                width: 150px;
+                 margin-left: 100px;
+        }
+
+      .nav-link{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size:large;
+        margin: 65px 0px 0px 20px;
+      }
+
+      select {
+        width: 50%;
+        height: 48px;
+      }
+
+      .table {
+        margin: 0 auto;
+        width: 50%;
+      }
+
     </style>
   </head>
   <body>
@@ -58,13 +90,20 @@
           <option value="<%=categories[i].id%>"><%=categories[i].cat_name%></option>
       <%  } %>
       </select>
-      <input type="submit">
+      <input class="btn btn-primary"type="submit" value="Add Category">
     </form>
-    <h3>Current Categories:</h3>
+    <h2>Current Categories:</h2>
 
-    <% for(let i = 0; i < added_cats.length; i++) { %>
-      <p><%=added_cats[i].cat_name%> <a href="/categories/remove/<%=recipe%>/<%=added_cats[i].category_id%>">Remove</a></p>
-    <% } %>
+    <table class="table table-striped">
+      <tbody>
+        <% for(let i = 0; i < added_cats.length; i++) { %>
+        <tr>
+          <td><%=added_cats[i].cat_name%></td>
+          <td><a href="/categories/remove/<%=recipe%>/<%=added_cats[i].category_id%>">Remove</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
