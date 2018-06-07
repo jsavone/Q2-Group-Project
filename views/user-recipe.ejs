@@ -54,6 +54,20 @@
         display: block;
         margin-bottom: 10px;
       }
+
+      hr.style-six {
+        text-align: left;
+        width: 200px;
+        border: 0;
+        height: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .commentHR {
+        width: 40%;
+      }
+
     </style>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
@@ -97,6 +111,7 @@
     <img src="<%=recipe.recipe_image%>">
     <p>Prep Time: <%=recipe.prep_time%></p>
     <p>Cook Time: <%=recipe.cook_time%></p>
+    <hr class="style-six">
     <h3>Ingredients:</h3>
     <p><%=recipe.ingredients%></p>
     <h3>Directions:</h3>
@@ -114,9 +129,12 @@
             <p><%=comments[i].comment%></p>
             <p>by - <img class="userImage" src="<%=comments[i].user_image%>">
             <%=comments[i].user_name%></p>
-             <!-- if(admin) { 
-            <a href="/comment/delete/<%=recipe.id%>/<%=comments[i].user_id%>">Delete</a>
-             }  -->
+            <% if(enable_edit) { %>
+            <a href="/comment/delete/<%=recipe.id%>/<%=comments[i].id%>">Delete</a>
+            <% } %>
+              <div class="commentHR"><hr>
+              </div>
+            </div>
           </div>
 
         <% } %>
