@@ -69,6 +69,9 @@
       #userImage {
         margin-left: 20%;
       }
+      a:hover {
+        text-decoration: none;
+      }
 
       </style>
   </head>
@@ -127,6 +130,7 @@
             <h1 ><%= saved_recipes[i].recipe_name %></h1>
             <img src="<%=saved_recipes[i].recipe_image%>" style="height:200px; width:200px">
             <a href="/recipe/<%= saved_recipes[i].id%>" class ="aligncenter">View</a>
+            <a href="/recipe/remove/<%=saved_id[i].id%>" class ="aligncenter">Remove</a>
           </div>
           <% } %>
       </div>

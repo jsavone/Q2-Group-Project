@@ -107,6 +107,12 @@ module.exports = {
 
   },
 
+  remove_saved: (req, res) => {
+    knex('saved_recipes').where('id', req.params.id).del().then(()=> {
+      res.redirect('/profile');
+    })
+  },
+
   delete: (req, res) => {
     knex('recipes').where('id', req.params.id).del().then(() => {
       res.redirect('/') //NEED TO CHANGE THIS TO PROFILE

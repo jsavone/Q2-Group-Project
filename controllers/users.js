@@ -120,6 +120,7 @@ module.exports = {
       user: users[0],
       recipe,
       saved_recipes: finalSavedRecipes,
+      saved_id: saved_recipes
     });
   },
 
