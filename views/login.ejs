@@ -12,10 +12,13 @@
       </style>
   </head>
   <body>
-    
+
     <h1>Login</h1>
     <% if (errors) { %>
       <p><%=errors%></p>
+    <% } %>
+    <% if (success) { %>
+      <p><%=success%></p>
     <% } %>
     <form action="/login" method="post">
       <p><input type="email" name="email" placeholder="Email"></p>

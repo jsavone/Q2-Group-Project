@@ -14,6 +14,9 @@
   <body>
 
     <h1>Register</h1>
+    <% if (errors) { %>
+      <p><%=errors%></p>
+    <% } %>
     <form action="/register" method="post">
       <input type="text" name="name" placeholder="Name">
       <input type="email" name="email" placeholder="Email">
@@ -21,6 +24,7 @@
       <input type="text" name="img_url" placeholder="Image URL">
       <!-- <input type="file" name="upload" accept=".jpg, .jpeg, .png"> -->
       <input type="password" name="password" placeholder="Password">
+      <input type="password" name="confirm" placeholder="Confirm Password">
       <button type="submit">Submit</button>
     </form>
 </body>
