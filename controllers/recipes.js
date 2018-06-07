@@ -1,16 +1,7 @@
 const knex = require("../db/knex.js");
 
-// const AWS = require('aws-sdk');
-// AWS.config.loadFromPath('./config.json');
-
-
-// var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project1"}});
-// const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project1/"
-
-
 
 module.exports = {
-  // CHANGE ME TO AN ACTUAL FUNCTION
 
   view: (req, res) => {
     req.session.enable_edit = false;
@@ -36,30 +27,17 @@ module.exports = {
   },
 
   add_recipe: function(req, res){
-    // let uploadData = {
-    //   Key: req.body.recipe_name,
-    //   Body: req.files.upload.data,
-    //   ContentType: req.files.upload.mimetype,
-    //   ACL: 'public-read'
-    // }
-    // s3Bucket.putObject(uploadData, function(err, data){
-    //   if(err){
-    //     console.log(err);
-    //     return;
-    //   }
     knex('recipes').insert({
       recipe_name: req.body.recipe_name,
       recipe_image: req.body.recipe_url,
-      // recipe_image: baseAWSURL + uploadData.Key,
       ingredients: req.body.ingredients,
       directions: req.body.directions,
       prep_time: req.body.prep_time,
       cook_time: req.body.cook_time,
       user_id: req.session.user_id
     }).then(()=> {
-      res.redirect('/profile') //We will need to change this to redirect to user profile
-    })
-  // })
+      res.redirect('/profile')
+      })
   },
 
   upvote: (req, res) => {
@@ -114,12 +92,19 @@ module.exports = {
   },
 
   save: (req, res) => {
-    knex('saved_recipes').insert({
-      user_id: req.session.user_id,
-      recipe_id: req.params.id
-    }).then(() => {
-      res.redirect('/recipe/'+req.params.id);
+    knex('saved_recipes').where({user_id: req.session.user_id, recipe_id: req.params.id}).then((result) => {
+      if(result.length >= 1) {
+        res.redirect('/recipe/'+req.params.id);
+      }else{
+        knex('saved_recipes').insert({
+          user_id: req.session.user_id,
+          recipe_id: req.params.id
+        }).then(() => {
+          res.redirect('/recipe/'+req.params.id);
+        })
+      }
     })
+
   },
 
   delete: (req, res) => {
@@ -128,7 +113,7 @@ module.exports = {
     })
   },
 
-recipeEdit: function(req, res) {
+  recipeEdit: function(req, res) {
     knex("users").where("id", req.session.user_id)
       .then(() => {
         knex("recipes").where("id", req.params.id)
@@ -139,7 +124,6 @@ recipeEdit: function(req, res) {
           })
       })
   },
-
 
   recipeUpdate: function(req, res) {
     knex('recipes').where("id", req.params.id)

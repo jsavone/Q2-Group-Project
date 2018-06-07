@@ -1,15 +1,7 @@
 const knex = require("../db/knex.js");
-
-// const AWS = require('aws-sdk');
-// AWS.config.loadFromPath('./config.json');
-// var s3Bucket = new AWS.S3({params: {Bucket: "q2-group-project-1"}});
-// const baseAWSURL = "https://s3-us-west-2.amazonaws.com/q2-group-project-1/"
-
 const hasher = require("../config/hasher");
 
-
 module.exports = {
-  // CHANGE ME TO AN ACTUAL FUNCTION
 
   newUsers: function(req, res) {
     if(!req.session.errors) {
@@ -61,18 +53,6 @@ module.exports = {
   register:function(req,res){
     req.session.errors = null;
     req.session.success = null;
-
-    // let uploadData = {
-    //   Key: req.body.email,
-    //   Body: req.files.upload.data,
-    //   ContentType: req.files.upload.mimetype,
-    //   ACL: 'public-read'
-    // }
-    // s3Bucket.putObject(uploadData, function(err, data){
-    //   if(err){
-    //     console.log(err);
-    //     return;
-    //   }
     if(req.body.password == req.body.confirm) {
       hasher.hash(req.body).then((users) => {
         knex("users").insert({
@@ -80,7 +60,6 @@ module.exports = {
           email:users.email,
           bio:users.bio,
           img_url: users.img_url,
-          // img_url:baseAWSURL + uploadData.Key, // We know that they key will be the end of the url
           password:users.password
         }).then(()=>{
           req.session.success = "New user has been created! You may now log in."
@@ -97,12 +76,7 @@ module.exports = {
         })
 
       }
-// })
-
   },
-
-
-
 
   login:function(req,res){
     req.session.errors = null;
@@ -142,7 +116,6 @@ module.exports = {
     const finalSavedRecipes = await Promise.all(saved_recipes.map(saved_recipe =>
                               knex("recipes").where({id: saved_recipe.recipe_id}).first()
                             )) ;
-    // console.log('finalSavedRecipes ', finalSavedRecipes)
     res.render("user-profile", {
       user: users[0],
       recipe,
@@ -169,6 +142,5 @@ module.exports = {
     req.session.destroy();
     res.redirect("/");
   },
-
 
 }
