@@ -21,7 +21,6 @@
         margin: 12px 0 20px 0;
         box-sizing: border-box;
 
-
     }
     img{
         float:left;
@@ -42,7 +41,13 @@
   }
   .textalign{
     text-align: center;
+    font-weight: 400;
+}
+  .btn {
+    width: 40%;
+    margin-bottom: 10px;
   }
+
   </style>
 </head>
   <body>
@@ -66,7 +71,9 @@
 
     <h1>Register</h1>
     <% if (errors) { %>
-      <p class ="textalign"><%=errors%></p>
+      <div class="alert alert-danger textalign" role="alert">
+         <%=errors%>
+       </div>
     <% } %>
     <div class="container">
         <div class="row">

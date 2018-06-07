@@ -18,7 +18,7 @@
     input{
         width:40%;
         padding: 10px 20px;
-        margin: 12px 0 20px 0;
+        margin: 12px 0 15px 0;
         box-sizing: border-box;
 
 
@@ -41,7 +41,13 @@
     margin: 65px 0px 0px 20px;
   }
   .textalign{
+    font-weight: 400;
     text-align: center;
+  }
+
+  .btn {
+    margin-top: 5px;
+    width: 40%;
   }
 
 
@@ -69,12 +75,14 @@
 
             <h1>Login</h1>
            <% if (errors) { %>
-             <div class ='textalign'>
-             <p><%=errors%></p>
+             <div class="alert alert-danger textalign" role="alert">
+                <%=errors%>
+              </div>
            <% } %>
            <% if (success) { %>
-             <p ><%=success%></p>
-           </div>
+             <div class="alert alert-success textalign" role="alert">
+                <%=success%>
+              </div>
            <% } %>
 
            <div class="container">
