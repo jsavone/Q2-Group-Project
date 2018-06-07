@@ -38,14 +38,6 @@ module.exports = {
     }else{
       res.render("login", {errors: req.session.errors=null, success: req.session.success = null})
     }
-    // if(!req.session.errors){
-    //   req.session.errors = null;
-    //   req.session.save(()=> {
-    //     res.render("login", {errors: req.session.errors, success: req.session.success});
-    //   })
-    // }else{
-    // res.render("login", {errors: req.session.errors, success: req.session.success});
-    // }
   },
 
   index: function(req, res) {
