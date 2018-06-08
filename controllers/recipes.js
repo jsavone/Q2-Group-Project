@@ -47,7 +47,7 @@ module.exports = {
         return
       }else if (vote.length>=1 && vote[0].vote=='down'){
         knex('votes').where('recipe_id', req.params.id).where('user_id', req.session.user_id).update({vote:'up'}).then(() => {
-          knex('recipes').where('id', req.params.id).increment('total_votes').then(() => {
+          knex('recipes').where('id', req.params.id).increment('total_votes',2).then(() => {
             res.redirect('/recipe/'+req.params.id)
           })
         })
@@ -73,7 +73,7 @@ module.exports = {
         return
       }else if (vote.length>=1 && vote[0].vote=='up'){
         knex('votes').where('recipe_id', req.params.id).where('user_id', req.session.user_id).update({vote:'down'}).then(() => {
-          knex('recipes').where('id', req.params.id).decrement('total_votes').then(() => {
+          knex('recipes').where('id', req.params.id).decrement('total_votes',2).then(() => {
             res.redirect('/recipe/'+req.params.id)
           })
         })
