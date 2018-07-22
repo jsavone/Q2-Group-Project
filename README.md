@@ -1,3 +1,11 @@
+# Q2 Galvanize Group Project - Cooks Club
+> Created by Nisha Bharti, David Sommerfeld, and John Savone
+
+For our Quarter 2 group project, we created Cooks Club, which is a recipe sharing site for food lovers. Users are able to upload their recipes, upvote/downvote & comment on other users recipes, and save their favorite recipes to their profile. Some technologies that we used were HTML, CSS, JavaScript, Node.js, Express, Knex, PostgreSQL, Bootstrap, and Github. As a team, we planned the wireframe, and laid out a plan to execute, which included splitting tasks and pages to streamline the process.
+
+## Live Demo - [View here](https://q2-group-project.herokuapp.com/)
+## Video Demo - [View here](https://www.youtube.com/watch?v=l3RkL5Zzc_c)
+
 # Q2 Group Project Requirements
 
 The goal of this project is to put what you've learned to use to:
